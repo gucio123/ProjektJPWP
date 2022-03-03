@@ -1,5 +1,7 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -11,22 +13,28 @@ import java.awt.*;
 
 public class TravellingSalesManGUI extends JFrame {
     private JPanel panel1;
-    private JButton button1;
+    private JButton Losowo;
     private JButton button2;
     private JButton button3;
-    private JPanel mapa;
+    private JPanel mapPanel;
     private JLabel mapLabel;
     private Image map;
 
     public TravellingSalesManGUI() {
         ImageIcon mapa = new ImageIcon("PROJEKT/map/mapka.png");
         map = mapa.getImage();
-        mapLabel.addMouseListener(new MouseAdapter() {
+        mapPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println(e.getX() + " " + e.getY());
-
+            }
+        });
+        Losowo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
+                random.way();
             }
         });
     }
