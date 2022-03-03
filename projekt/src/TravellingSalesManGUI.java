@@ -12,16 +12,33 @@ import java.awt.geom.*;
 import java.awt.*;
 
 public class TravellingSalesManGUI extends JFrame {
-    private JPanel panel1;
+
     private JButton Losowo;
     private JButton button2;
     private JButton button3;
     private JPanel mapPanel;
     private JLabel mapLabel;
     private Image map;
-    private boolean paintcheck = false;
+    private boolean paintcheck = true;
     private TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
+
+    private JPanel panel1 = new JPanel(){
+        @Override
+        public void paintComponent(Graphics g) {
+//            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.drawImage(map, 0, 0, null);
+            g2.setColor(Color.RED);
+            if (paintcheck) {
+                for (int i = 0; i < random.getFinalLIst().toArray().length - 1; i++) {
+                    g2.drawLine(random.getFinalLIst().get(i).getX(), random.getFinalLIst().get(i).getY(), random.getFinalLIst().get(i + 1).getX(), random.getFinalLIst().get(i + 1).getY());
+                }
+            }
+        }
+    };
+
     public TravellingSalesManGUI() {
+
         ImageIcon mapa = new ImageIcon("PROJEKT/map/mapka.png");
         map = mapa.getImage();
         mapPanel.addMouseListener(new MouseAdapter() {
@@ -36,22 +53,13 @@ public class TravellingSalesManGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 random.way();
                 paintcheck = true;
+                panel1.repaint();
+
             }
+
         });
+        panel1.add(Losowo);
     }
-        @Override
-        public void paint(Graphics g){
-            Graphics2D g2 = (Graphics2D) g;
-            g2.drawImage(map,0,0,null);
-            g2.setColor(Color.RED);
-            if(paintcheck){
-                for(int i = 0; i < random.getFinalLIst().toArray().length - 1; i++){
-                    g2.drawLine(random.getFinalLIst().get(i).getX(), random.getFinalLIst().get(i).getY(),
-                            random.getFinalLIst().get(i+1).getX(), random.getFinalLIst().get(i + 1).getY());
-                }
-            }
-//            g2.drawLine(77, 268, 237, 390);
-        }
 
     public static void main(String[] args) throws IOException {
 //        JFrame frame = new JFrame("TravellingSalesManGUI");
@@ -60,6 +68,7 @@ public class TravellingSalesManGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(798,570);
+        frame.setSize(798, 570);
     }
 }
+
