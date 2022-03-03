@@ -1,9 +1,9 @@
 public class City {
     private String name;
-    private float x;
-    private float y;
+    private int x;
+    private int y;
 
-    public City(String name, float x, float y) {
+    public City(String name, int x, int y) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -13,11 +13,11 @@ public class City {
         return name;
     }
 
-    public float getX() {
+    public int getX() {
         return x;
     }
 
-    public float getY() {
+    public int getY() {
         return y;
     }
 }

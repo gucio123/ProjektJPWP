@@ -19,7 +19,8 @@ public class TravellingSalesManGUI extends JFrame {
     private JPanel mapPanel;
     private JLabel mapLabel;
     private Image map;
-
+    private boolean paintcheck = false;
+    private TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     public TravellingSalesManGUI() {
         ImageIcon mapa = new ImageIcon("PROJEKT/map/mapka.png");
         map = mapa.getImage();
@@ -33,8 +34,8 @@ public class TravellingSalesManGUI extends JFrame {
         Losowo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
                 random.way();
+                paintcheck = true;
             }
         });
     }
@@ -43,6 +44,12 @@ public class TravellingSalesManGUI extends JFrame {
             Graphics2D g2 = (Graphics2D) g;
             g2.drawImage(map,0,0,null);
             g2.setColor(Color.RED);
+            if(paintcheck){
+                for(int i = 0; i < random.getFinalLIst().toArray().length - 1; i++){
+                    g2.drawLine(random.getFinalLIst().get(i).getX(), random.getFinalLIst().get(i).getY(),
+                            random.getFinalLIst().get(i+1).getX(), random.getFinalLIst().get(i + 1).getY());
+                }
+            }
 //            g2.drawLine(77, 268, 237, 390);
         }
 
