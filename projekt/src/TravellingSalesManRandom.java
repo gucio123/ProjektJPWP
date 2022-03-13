@@ -26,7 +26,14 @@ public class TravellingSalesManRandom {
 
         for(int i = 0 ; i < finalLIst.toArray().length - 1; i++) {
             System.out.println(finalLIst.get(i).getName());
+            int neighbourDistance = (int) Math.sqrt(Math.pow(finalLIst.get(0).getX()- finalLIst.get(i+1).getX(), 2)
+                    + Math.pow(finalLIst.get(0).getY()- finalLIst.get(i+1).getY(), 2));
+            wayLenght += neighbourDistance;
         }
+    }
+
+    public int getWayLenght() {
+        return wayLenght;
     }
 
     public List<City> getFinalLIst() {

@@ -43,6 +43,9 @@ public class TravellingSalesManGUI extends JFrame {
                             ((random.getFinalLIst().get(i).getY())+random.getFinalLIst().get(i+1).getY())/2 );
                     g2.setColor(Color.RED);
                 }
+                g2.setColor(Color.BLACK);
+                g2.drawString(String.valueOf(random.getWayLenght()), 100, 10);
+                g2.setColor(Color.RED);
             }
         }
     };
