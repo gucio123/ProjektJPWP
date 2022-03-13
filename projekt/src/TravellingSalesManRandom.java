@@ -7,7 +7,7 @@ public class TravellingSalesManRandom {
     public TravellingSalesManRandom(String firstCity) {
         this.firstCity = firstCity;
     }
-
+    private int wayLenght = 0;
     public void way(){
         int index;
         for(int i = 0 ; i < list.toArray().length; i++){
@@ -23,9 +23,10 @@ public class TravellingSalesManRandom {
             finalLIst.add(list.get(random));
             list.remove(list.get(random));
         }
-        for(int i = 0 ; i < finalLIst.toArray().length; i++)
-            System.out.println(finalLIst.get(i).getName());
 
+        for(int i = 0 ; i < finalLIst.toArray().length - 1; i++) {
+            System.out.println(finalLIst.get(i).getName());
+        }
     }
 
     public List<City> getFinalLIst() {
