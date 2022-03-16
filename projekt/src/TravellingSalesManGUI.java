@@ -75,7 +75,7 @@ public class TravellingSalesManGUI extends JFrame {
                 for(int i = 0; i < 100; i++) {
                     index = i;
                     try{
-                        Thread.sleep(1);
+                        Thread.sleep(5);
                         panel1.repaint();
                     }catch (InterruptedException exc){}
 
