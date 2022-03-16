@@ -49,14 +49,10 @@ public class TravellingSalesManGUI extends JFrame {
             }
             if (geneticCheck) {
                     for (int j = 0; j < genetic.getList().get(index).toArray().length - 1; j++) {
-                            g2.drawLine(((City) genetic.getList().get(index).get(j)).getX(), ((City) genetic.getList().get(index).get(j)).getY(), ((City) genetic.getList().get(index).get(j + 1)).getX(), ((City) genetic.getList().get(index).get(j + 1)).getY());
-//                            System.out.println("dupa");
-
-//                            g2.setColor(Color.BLACK);
-
-//                        g2.drawString(String.valueOf(i + 1), ((random.getFinalLIst().get(i).getX()) + random.getFinalLIst().get(i + 1).getX()) / 2,
-//                                ((random.getFinalLIst().get(i).getY()) + random.getFinalLIst().get(i + 1).getY()) / 2);
-//                        g2.setColor(Color.RED);
+                            g2.drawLine(((City) genetic.getList().get(index).get(j)).getX(),
+                                    ((City) genetic.getList().get(index).get(j)).getY(),
+                                    ((City) genetic.getList().get(index).get(j + 1)).getX(),
+                                    ((City) genetic.getList().get(index).get(j + 1)).getY());
                     }
             }
         }};
