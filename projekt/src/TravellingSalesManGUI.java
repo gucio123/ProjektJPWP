@@ -93,7 +93,7 @@ public class TravellingSalesManGUI extends JFrame {
                         for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
                             index = k;
                             try {
-                                Thread.sleep(5);
+                                Thread.sleep(0,10);
                                 panel1.repaint();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
