@@ -22,6 +22,7 @@ public class TravellingSalesManGUI extends JFrame {
     private boolean paintcheck = false;
     private boolean geneticCheck = false;
     private int index = -1;
+    private int glownyIndex;
     private TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     private GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
 
@@ -51,11 +52,21 @@ public class TravellingSalesManGUI extends JFrame {
 
 
             if (geneticCheck) {
-                for (int j = 0; j < genetic.getList().get(index).toArray().length - 1; j++)
-                    g2.drawLine(((City) genetic.getList().get(index).get(j)).getX(),
-                            ((City) genetic.getList().get(index).get(j)).getY(),
-                            ((City) genetic.getList().get(index).get(j + 1)).getX(),
-                            ((City) genetic.getList().get(index).get(j + 1)).getY());
+//                for (int j = 0; j < genetic.getList().get(index).toArray().length - 1; j++)
+//                    g2.drawLine(((City) genetic.getList().get(index).get(j)).getX(),
+//                            ((City) genetic.getList().get(index).get(j)).getY(),
+//                            ((City) genetic.getList().get(index).get(j + 1)).getX(),
+//                            ((City) genetic.getList().get(index).get(j + 1)).getY());
+                for (int j = 0; j < genetic.getFinalList().get(index).toArray().length - 2; j++) {
+                    g2.drawLine(((City) genetic.getFinalList().get(index).get(j)).getX(),
+                            ((City) genetic.getFinalList().get(index).get(j)).getY(),
+                            ((City) genetic.getFinalList().get(index).get(j + 1)).getX(),
+                            ((City) genetic.getFinalList().get(index).get(j + 1)).getY());
+//                    g2.setColor(Color.BLACK);
+//                    g2.drawString(String.valueOf(random.getWayLenght()), 100, 10);
+//                    g2.setColor(Color.RED);
+                }
+
             }
         }
     };
@@ -73,16 +84,16 @@ public class TravellingSalesManGUI extends JFrame {
         genetyczny.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                genetic.firstPopulation();
+                genetic.geneticAlgorithm();
                 panel1.repaint();
                 geneticCheck = true;
                 Runnable paintController = new Runnable() {
                     @Override
                     public void run() {
-                        for (int k = 0; k < 100; k++) {
+                        for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
                             index = k;
                             try {
-                                Thread.sleep(200);
+                                Thread.sleep(1);
                                 panel1.repaint();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
