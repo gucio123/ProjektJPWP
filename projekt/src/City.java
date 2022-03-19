@@ -2,7 +2,6 @@ public class City {
     private String name;
     private int x;
     private int y;
-
     public City(String name, int x, int y) {
         this.name = name;
         this.x = x;
