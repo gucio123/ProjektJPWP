@@ -21,7 +21,7 @@ public class TravellingSalesManGUI extends JFrame {
     private Image map;
     private boolean paintcheck = false;
     private boolean geneticCheck = false;
-    private int index = -1;
+    private int index = 0;
     private int glownyIndex;
     private TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     private GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
@@ -62,10 +62,10 @@ public class TravellingSalesManGUI extends JFrame {
                             ((City) genetic.getFinalList().get(index).get(j)).getY(),
                             ((City) genetic.getFinalList().get(index).get(j + 1)).getX(),
                             ((City) genetic.getFinalList().get(index).get(j + 1)).getY());
-//                    g2.setColor(Color.BLACK);
-//                    g2.drawString(String.valueOf(random.getWayLenght()), 100, 10);
-//                    g2.setColor(Color.RED);
                 }
+                g2.setColor(Color.BLACK);
+                g2.drawString(genetic.getFinalList().get(index).get(16).toString(), 100, 10);
+                g2.setColor(Color.RED);
 
             }
         }
