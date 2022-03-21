@@ -4,7 +4,7 @@ public class GeneticTravellingSalesman {
     public List<List> list = new ArrayList<>();
     private List<List> finalList = new ArrayList<>();
     public void firstPopulation() {
-        for (int i = 0; i < 65536; i++) {
+        for (int i = 0; i < 32768; i++) {
             TravellingSalesManRandom randomway = new TravellingSalesManRandom("Waszyngton");
             randomway.way();
             list.add(randomway.getFinalLIst());
