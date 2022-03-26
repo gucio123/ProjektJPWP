@@ -77,6 +77,7 @@ public class TravellingSalesManGUI extends JFrame {
                             ((City) genetic.getFinalList().get(index).get(j + 1)).getY());
                 }
                 g2.setColor(Color.BLACK);
+                if(genetic.getFinalList().get(index).toArray().length == 17)
                 g2.drawString(genetic.getFinalList().get(index).get(16).toString(), 100, 10);
                 g2.setColor(Color.RED);
 
@@ -116,7 +117,7 @@ public class TravellingSalesManGUI extends JFrame {
                 };
                 Thread paintThread = new Thread(paintController);
                 paintThread.start();
-
+//            geneticCheck = false;
             }
 
         });
@@ -126,6 +127,7 @@ public class TravellingSalesManGUI extends JFrame {
                 random.way();
                 paintcheck = true;
                 panel1.repaint();
+//                paintcheck = false;
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {
@@ -150,6 +152,7 @@ public class TravellingSalesManGUI extends JFrame {
                 };
                 Thread paintThread = new Thread(paintController);
                 paintThread.start();
+//                annealing = false;
             }
         });
         panel1.add(Losowo);
