@@ -11,7 +11,15 @@ public class GeneticTravellingSalesman {
         }
 //        System.out.println(list);
     }
-
+    public void mutation(List<Object> onePath){
+        Random r = new Random();
+        float mutationRate = r.nextFloat();
+        if(mutationRate <=0.001){
+            int firstIndex = r.nextInt(16);
+            int secondIndex = r.nextInt(16);
+            Collections.swap(onePath, firstIndex, secondIndex);
+        }
+    }
     public void fittness(List<Object> listToCalculate) {
         int result = 0;
         for (int i = 0; i < listToCalculate.toArray().length - 1; i++) {
@@ -54,61 +62,59 @@ public class GeneticTravellingSalesman {
         }
         return selected;
     }
+    public List<List> crossover(List<List> parents){
+        Random r = new Random();
+        int index = r.nextInt(15)+1;
+        for (int j = 0; j <= index; j++) {
+            City a = (City) parents.get(0).get(j);
+            int first = a.getNumber();
+            City b = (City) parents.get(1).get(j);
+            int second = b.getNumber();
+            for (int x = j; x < 16; x++) {
+                if (((City) parents.get(0).get(x)).getNumber() == second) {
+                    Collections.swap(parents.get(0), j, x);
+                }
+            }
+        }
+        return parents;
+    }
 
     public List<List> cross(List<List> selectedPop) {
         List<List> children = new ArrayList<>();
-        List<List> copy = new ArrayList<>();
-        copy.addAll(selectedPop);
+        List<List> copy = new ArrayList<>(selectedPop);
         selectedPop.clear();
 //        Collections.shuffle(selectedPop);
         for (int i = 0; i < copy.toArray().length - 1; i += 2) {
-//            System.out.println("selected1 :" + copy);
             List<List> parents = new ArrayList<>();
-//            System.out.println("parents :" + parents);
-            parents.add(copy.get(i));
-            parents.add(copy.get(i + 1));
+            parents.add(0,new ArrayList(copy.get(i)));
+            parents.add(1,new ArrayList(copy.get(i + 1)));
 //            System.out.println("Przed krosowaniem " + parents);
-            Random r = new Random();
-            int index = r.nextInt(16);
-            for (int j = 0; j <= index; j++) {
-                City a = (City) parents.get(0).get(j);
-                int first = a.getNumber();
-                City b = (City) parents.get(1).get(j);
-                int second = b.getNumber();
-                for (int x = j; x < 16; x++) {
-                        if (((City) parents.get(0).get(x)).getNumber() == second) {
-                            Collections.swap(parents.get(0), j, x);
-                        }
-                }
-            }
-                children.add(parents.get(0));
-                children.get(i).remove(16);
-                this.fittness(children.get(i));
-                parents.remove(1);
-                parents.remove(0);
-//            System.out.println("selected2 :" + copy);
-                Random random = new Random();
-                int indeks = random.nextInt(16);
-//            System.out.println("Parents " + parents);
-                parents.add(copy.get(i));
-                parents.add(copy.get(i + 1));
-//            System.out.println("Parents 2" + parents);
-                for (int k = 0; k <= indeks; k++) {
-                    City m = (City) parents.get(0).get(k);
-                    int pierwsze = m.getNumber();
-                    City n = (City) parents.get(1).get(k);
-                    int drugie = n.getNumber();
-                    for (int x = k; x < 16; x++) {
-                            if (((City) parents.get(1).get(x)).getNumber() == pierwsze) {
-                                Collections.swap(parents.get(1), k, x);
-                            }
-                    }
-                }
-                    children.add(parents.get(1));
-//            System.out.println("przed liczeniem" + children.get(1));
-                    children.get(i+1).remove(16);
-                    this.fittness(children.get(i+1));
-//            System.out.println("po liczeniu" + children.get(1));
+            parents = this.crossover(parents);
+            this.mutation(parents.get(0));
+            children.add(parents.get(0));
+            children.get(i).remove(16);
+            this.fittness(children.get(i));
+            parents.clear();
+            Random random = new Random();
+            int indeks = random.nextInt(16);
+            parents.add(0,new ArrayList(copy.get(i + 1)));
+            parents.add(1,new ArrayList(copy.get(i)));
+//                for (int k = 0; k <= indeks; k++) {
+//                    City m = (City) parents.get(0).get(k);
+//                    int pierwsze = m.getNumber();
+//                    City n = (City) parents.get(1).get(k);
+//                    int drugie = n.getNumber();
+//                    for (int x = k; x < 16; x++) {
+//                            if (((City) parents.get(1).get(x)).getNumber() == pierwsze) {
+//                                Collections.swap(parents.get(1), k, x);
+//                            }
+//                    }
+//                }
+            parents = this.crossover(parents);
+            this.mutation(parents.get(0));
+            children.add(parents.get(0));
+            children.get(i+1).remove(16);
+            this.fittness(children.get(i+1));
 //                    System.out.println("Po krosowaniu " + children);
 //                    System.out.println();
                 }
@@ -133,39 +139,18 @@ public class GeneticTravellingSalesman {
     }
 
     public void geneticAlgorithm(){
-//        GeneticTravellingSalesman genetyczny = new GeneticTravellingSalesman();
-//        genetyczny.firstPopulation();
-//        for (int i = 0; i < genetyczny.list.toArray().length; i++) {
-//            genetyczny.fittness(genetyczny.list.get(i));
-//            System.out.println("Fittnes 1 populacji" + genetyczny.list.get(i));
-//        }
-//        List<List> nowaPopulacja = genetyczny.selection(genetyczny.getList());
-//        for (int i = 0; i < nowaPopulacja.size(); i++) {
-//            System.out.println("Selekcja " + nowaPopulacja.get(i));
-//        }
-//        System.out.println(nowaPopulacja.toArray().length);
-//        nowaPopulacja = genetyczny.cross(nowaPopulacja);
         this.firstPopulation();
         for (int i = 0; i < this.list.toArray().length; i++) {
             this.fittness(this.list.get(i));
-//                System.out.println("Fittnes 1 populacji" + genetyczny.list.get(i));
         }
-//        System.out.println(this.getList());
         this.getFinalList().add(this.list);
         while(this.getList().toArray().length > 1){
-//            System.out.println(this.getList().toArray().length);
             this.setList(this.selection(this.getList()));
             this.setList(this.cross(this.getList()));
-//            System.out.println(this.getList().toArray().length);
-//            this.getFinalList().add(this.list);
             for(int i = 0; i < list.toArray().length; i++)
                 this.finalList.add(this.list.get(i));
-//            System.out.println(this.getList());
         }
         System.out.println(getFinalList());
-//        genetyczny.setList(genetyczny.selection(genetyczny.getList()));
-//        System.out.println(genetyczny.getList());
-//        System.out.println(genetyczny.getList());
     }
 
     public static void main(String[] args) {
