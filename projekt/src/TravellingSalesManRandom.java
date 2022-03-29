@@ -16,7 +16,7 @@ public class TravellingSalesManRandom {
         this.firstCity = firstCity;
     }
     private int wayLenght = 0;
-    public void way(){
+    public void  way(){
         int index;
         for(int i = 0 ; i < list.toArray().length; i++){
             if(list.get(i).getName().equals(firstCity)) {

@@ -12,6 +12,7 @@ public class TravellingSalesmanGreedy {
 
     private List<City> finalList = new ArrayList<>();
     private List<City> list = cities;
+    private int totalDist = 0;
 
 
     public List<City> getList() {
@@ -22,31 +23,37 @@ public class TravellingSalesmanGreedy {
         return finalList;
     }
 
-    public void greedyAlgorithm(){
+    public void greedyAlgorithm() {
         TravellingSalesmanGreedy list = new TravellingSalesmanGreedy();
         list.finalList.add(list.getList().get(4));
+        list.getList().remove(4);
         for (int k = 0; k < list.getList().toArray().length; k++) {
             int index = 0;
+            int miniDist = 9999999;
             for (int i = 0; i < list.getList().toArray().length; i++) {
-                if(list.finalList.contains(getList().get(i))){
+                if (list.finalList.contains(list.getList().get(i))) {
                     continue;
                 }
                 int distance = (int) Math.sqrt(Math.pow(list.finalList.get(k).getX() - list.list.get(i).getX(), 2) +
                         Math.pow(list.finalList.get(k).getY() - list.list.get(i).getY(), 2));
-                int miniDist = 9999999;
                 if (distance < miniDist) {
                     miniDist = distance;
                     index = i;
                 }
             }
             list.finalList.add(list.getList().get(index));
+            totalDist+= miniDist;
+//            System.out.println(totalDist);
         }
-        System.out.println(list.getFinalList());
+        for(int m = 0; m < list.finalList.toArray().length;m++){
+            System.out.println(list.finalList.get(m).getName());
+        }
+//        System.out.println(list.getFinalList());
     }
 
 
     public static void main(String[] args) {
         TravellingSalesmanGreedy zachlanny = new TravellingSalesmanGreedy();
-                zachlanny.greedyAlgorithm();
+        zachlanny.greedyAlgorithm();
     }
 }
