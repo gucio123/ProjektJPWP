@@ -49,7 +49,7 @@ public class SimulatedAnnealingTSM {
         this.currentLength = this.calculatePath(this.currentPath);
         this.temperature = this.startingTemperature;
         for(int i = 0; i < 1000000; i++){
-            if(temperature > 0.1) {
+            if(temperature > 0.005) {
                 System.out.println("Droga przed swapem" + this.currentPath + " " + this.currentLength);
                 this.swap(this.currentPath);
                 System.out.println("Droga po swapie" + this.currentPath + " " + this.currentLength);

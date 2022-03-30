@@ -17,17 +17,20 @@ public class TravellingSalesManGUI extends JFrame {
     private JButton Losowo = new JButton("Losowy");
     private JButton genetyczny = new JButton("Genetyczny");
     private JButton wyzarzanie = new JButton("Wyżarzanie");
+    private JButton zachlanny = new JButton("Zachlanny");
     private JPanel mapPanel;
     private JLabel mapLabel;
     private Image map;
     private boolean paintcheck = false;
     private boolean geneticCheck = false;
     private boolean annealing = false;
+    private boolean greedyCheck = false;
     private int index = 0;
     private int glownyIndex;
     private TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     private GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
     private SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.98);
+    private TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
 
 
     private JPanel panel1 = new JPanel() {
@@ -50,7 +53,6 @@ public class TravellingSalesManGUI extends JFrame {
                 g2.setColor(Color.BLACK);
                 g2.drawString(String.valueOf(random.getWayLenght()), 100, 10);
                 g2.setColor(Color.RED);
-
             }
 
             if(annealing){
@@ -77,9 +79,18 @@ public class TravellingSalesManGUI extends JFrame {
                             ((City) genetic.getFinalList().get(index).get(j + 1)).getY());
                 }
                 g2.setColor(Color.BLACK);
+                if(genetic.getFinalList().get(index).toArray().length == 17)
                 g2.drawString(genetic.getFinalList().get(index).get(16).toString(), 100, 10);
                 g2.setColor(Color.RED);
 
+            }
+            if(greedyCheck){
+                for(int k=0;k < greedy.getFinalList().toArray().length;k++){
+                    g2.drawLine(greedy.getFinalList().get(k).getX(),
+                            greedy.getFinalList().get(k).getY(),
+                            greedy.getFinalList().get(k+1).getX(),
+                            greedy.getFinalList().get(k+1).getY());
+                }
             }
         }
     };
@@ -92,6 +103,30 @@ public class TravellingSalesManGUI extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println(e.getX() + " " + e.getY());
+            }
+        });
+
+        zachlanny.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                greedy.greedyAlgorithm();
+                panel1.repaint();
+                greedyCheck = true;
+                Runnable paintController = new Runnable() {
+                    @Override
+                    public void run() {
+                        for(int i = 0;i < greedy.getFinalList().toArray().length; i++){
+                            try{
+                                Thread.sleep(500);
+                                panel1.repaint();
+                            } catch (InterruptedException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                };
+                Thread paintThread = new Thread(paintController);
+                paintThread.start();
             }
         });
         genetyczny.addActionListener(new ActionListener() {
@@ -116,7 +151,7 @@ public class TravellingSalesManGUI extends JFrame {
                 };
                 Thread paintThread = new Thread(paintController);
                 paintThread.start();
-
+//            geneticCheck = false;
             }
 
         });
@@ -126,6 +161,7 @@ public class TravellingSalesManGUI extends JFrame {
                 random.way();
                 paintcheck = true;
                 panel1.repaint();
+//                paintcheck = false;
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {
@@ -150,11 +186,14 @@ public class TravellingSalesManGUI extends JFrame {
                 };
                 Thread paintThread = new Thread(paintController);
                 paintThread.start();
+//                annealing = false;
             }
         });
         panel1.add(Losowo);
         panel1.add(genetyczny);
         panel1.add(wyzarzanie);
+        panel1.add(zachlanny);
+
     }
 
     public static void main(String[] args) throws IOException {
