@@ -29,7 +29,7 @@ public class TravellingSalesManGUI extends JFrame {
     private int glownyIndex;
     private TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     private GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
-    private SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.98);
+    private SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.985);
     private TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
 
 
@@ -63,11 +63,11 @@ public class TravellingSalesManGUI extends JFrame {
                             ((City) anneal.getFinalList().get(index).get(i + 1)).getY());
                 }
                 g2.setColor(Color.BLACK);
-                g2.drawString(String.valueOf(anneal.getCurrentLength()), 100, 10);
+                g2.drawString(String.valueOf(anneal.getListOfLenghts().get(index)), 50, 10);
                 g2.setColor(Color.RED);
 
                 g2.setColor(Color.BLACK);
-                g2.drawString(String.valueOf(anneal.getTemperature()), 120, 10);
+                g2.drawString(String.valueOf(anneal.getListOfTemperatures().get(index)), 100, 10);
                 g2.setColor(Color.RED);
             }
 
@@ -80,17 +80,20 @@ public class TravellingSalesManGUI extends JFrame {
                 }
                 g2.setColor(Color.BLACK);
                 if(genetic.getFinalList().get(index).toArray().length == 17)
-                g2.drawString(genetic.getFinalList().get(index).get(16).toString(), 100, 10);
+                g2.drawString(genetic.getFinalList().get(index).get(16).toString(), 50, 10);
                 g2.setColor(Color.RED);
 
             }
             if(greedyCheck){
-                for(int k=0;k < greedy.getFinalList().toArray().length;k++){
+                for(int k=0;k < greedy.getFinalList().toArray().length - 1;k++){
                     g2.drawLine(greedy.getFinalList().get(k).getX(),
                             greedy.getFinalList().get(k).getY(),
                             greedy.getFinalList().get(k+1).getX(),
                             greedy.getFinalList().get(k+1).getY());
                 }
+                g2.setColor(Color.BLACK);
+                g2.drawString(String.valueOf(greedy.getTotalDist()), 50, 10);
+                g2.setColor(Color.RED);
             }
         }
     };
@@ -110,23 +113,8 @@ public class TravellingSalesManGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 greedy.greedyAlgorithm();
-                panel1.repaint();
                 greedyCheck = true;
-                Runnable paintController = new Runnable() {
-                    @Override
-                    public void run() {
-                        for(int i = 0;i < greedy.getFinalList().toArray().length; i++){
-                            try{
-                                Thread.sleep(500);
-                                panel1.repaint();
-                            } catch (InterruptedException e){
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                };
-                Thread paintThread = new Thread(paintController);
-                paintThread.start();
+                panel1.repaint();
             }
         });
         genetyczny.addActionListener(new ActionListener() {
@@ -151,7 +139,6 @@ public class TravellingSalesManGUI extends JFrame {
                 };
                 Thread paintThread = new Thread(paintController);
                 paintThread.start();
-//            geneticCheck = false;
             }
 
         });
@@ -161,7 +148,6 @@ public class TravellingSalesManGUI extends JFrame {
                 random.way();
                 paintcheck = true;
                 panel1.repaint();
-//                paintcheck = false;
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {
@@ -186,7 +172,6 @@ public class TravellingSalesManGUI extends JFrame {
                 };
                 Thread paintThread = new Thread(paintController);
                 paintThread.start();
-//                annealing = false;
             }
         });
         panel1.add(Losowo);
