@@ -4,9 +4,9 @@ import java.util.List;
 
 public class GreedyBackpack {
 
-    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Skarpety",1, 1), new Items("taśmy",2, 5), new Items("Tank-top",3, 8),
-            new Items("Pas",2, 5), new Items("rekawice",1, 2), new Items("Białko",4, 8),
-            new Items("Trenbolon",6, 17), new Items("Kreatyna",5, 10), new Items("tygrys bubblegum",4, 6)));
+    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Skarpety",1, 2), new Items("taśmy",2, 5), new Items("Tank-top",2, 8),
+            new Items("Pas",2, 5), new Items("rekawice",1, 1), new Items("Białko",4, 8),
+            new Items("Trenbolon",6, 18), new Items("Kreatyna",5, 10), new Items("tygrys bubblegum",4, 6)));
 
 
     private List<Items> backpack = new ArrayList<>();
@@ -31,6 +31,9 @@ public class GreedyBackpack {
             int index = 0;
             int bkpkMaxCapacity = 20;
             for (int i = 0; i < items.getItems().toArray().length; i++) {
+                if(items.backpack.contains(items.getItems().get(i))){
+                    continue;
+                }
                 wage = items.getItems().get(i).getValue() / items.getItems().get(i).getWeight();
                 if (wage > maxi) {
                     maxi = wage;
@@ -40,7 +43,6 @@ public class GreedyBackpack {
                     if (bkpkCapacity + items.getItems().get(i).getWeight() < 20) {
                         items.backpack.add(items.getItems().get(index));
                         bkpkCapacity += items.backpack.get(temp).getWeight();
-                        items.getItems().remove(index);
                         temp++;
                     }
                 }
