@@ -14,6 +14,9 @@ public class TravellingSalesmanGreedy {
     private List<City> list = cities;
     private int totalDist = 0;
 
+    public int getTotalDist() {
+        return totalDist;
+    }
 
     public List<City> getList() {
         return list;
@@ -42,13 +45,9 @@ public class TravellingSalesmanGreedy {
                 }
             }
             list.finalList.add(list.getList().get(index));
-            totalDist+= miniDist;
-//            System.out.println(totalDist);
+            this.totalDist += miniDist;
         }
-        for(int m = 0; m < list.finalList.toArray().length;m++){
-            System.out.println(list.finalList.get(m).getName());
-        }
-//        System.out.println(list.getFinalList());
+        this.getFinalList().addAll(list.getFinalList());
     }
 
 

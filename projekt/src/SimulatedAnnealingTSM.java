@@ -13,6 +13,8 @@ public class SimulatedAnnealingTSM {
     private int bestLength;
     private List previousPath;
     private float temperature;
+    private List<Float> listOfTemperatures =  new ArrayList<>();
+    private List<Integer> listOfLenghts = new ArrayList<>();
     public SimulatedAnnealingTSM(int numberOfIterations, float startingTemperature, float temperatureRate) {
         this.numberOfIterations = numberOfIterations;
         this.startingTemperature = startingTemperature;
@@ -33,8 +35,8 @@ public class SimulatedAnnealingTSM {
     }
     public void swap(List<City> lista){
         Random r = new Random();
-        int index1 = r.nextInt(16);
-        int index2 = r.nextInt(16);
+        int index1 = r.nextInt(15) + 1;
+        int index2 = r.nextInt(15) + 1;
         previousPath = new ArrayList(lista);
         Collections.swap(lista, index1, index2);
         this.currentLength = this.calculatePath(lista);
@@ -44,25 +46,34 @@ public class SimulatedAnnealingTSM {
         this.currentLength = this.calculatePath(currentPath);
     }
     public void algorithm(){
-//        SimulatedAnnealingTSM object = new SimulatedAnnealingTSM(100, 2000, (float) 0.98);
         this.bestLength = this.calculatePath(this.currentPath);
         this.currentLength = this.calculatePath(this.currentPath);
         this.temperature = this.startingTemperature;
-        for(int i = 0; i < 1000000; i++){
-            if(temperature > 0.005) {
-                System.out.println("Droga przed swapem" + this.currentPath + " " + this.currentLength);
+        for(int i = 0; i < 10000; i++){
+            if(temperature > 0.1) {
                 this.swap(this.currentPath);
-                System.out.println("Droga po swapie" + this.currentPath + " " + this.currentLength);
                 if (this.currentLength < this.bestLength)
                     this.bestLength = this.currentLength;
-                else if (Math.exp((this.bestLength - this.currentLength) / temperature) < Math.random())
+                else if (Math.exp((this.bestLength - this.currentLength) / temperature) < Math.random()) {
                     this.unDoSwap();
+                    this.temperature /= this.temperatureRate;
+                }
                 System.out.println("Droga po warunku odwrotu" + this.currentPath + " " + this.currentLength);
                 System.out.println(i);
             }
             this.temperature *= this.temperatureRate;
             this.finalList.add(this.currentPath);
+            this.listOfTemperatures.add(temperature);
+            this.listOfLenghts.add(this.currentLength);
         }
+    }
+
+    public List<Float> getListOfTemperatures() {
+        return listOfTemperatures;
+    }
+
+    public List<Integer> getListOfLenghts() {
+        return listOfLenghts;
     }
 
     public List<List> getFinalList() {
