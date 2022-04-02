@@ -2,8 +2,10 @@ public class Items {
 
     private int weight;
     private int value;
+    private String name;
 
-    public Items(int weight, int value) {
+    public Items(String name, int weight, int value) {
+        this.name = name;
         this.weight = weight;
         this.value = value;
     }
@@ -14,5 +16,9 @@ public class Items {
 
     public int getValue() {
         return value;
+    }
+
+    public String getName() {
+        return name;
     }
 }
