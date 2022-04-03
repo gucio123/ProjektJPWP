@@ -33,7 +33,7 @@ public class TravellingSalesManGUI extends JFrame {
     private TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
 
 
-    private JPanel panel1 = new JPanel() {
+    public JPanel panel1 = new JPanel(){
         @Override
         public void paint(Graphics g) {
             super.paintComponent(g);
