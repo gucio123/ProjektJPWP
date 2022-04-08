@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TravellingSalesManGUI extends JFrame {
 
@@ -31,7 +33,7 @@ public class TravellingSalesManGUI extends JFrame {
     private GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
     private SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.985);
     private TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
-
+    private List<List> listToPass = new ArrayList<>();
 
     public JPanel panel1 = new JPanel(){
         @Override
@@ -126,6 +128,9 @@ public class TravellingSalesManGUI extends JFrame {
                 Runnable paintController = new Runnable() {
                     @Override
                     public void run() {
+                        int counter = 16384;
+                        int pomoc = 16384;
+                        int next;
                         for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
                             index = k;
                             try {
@@ -134,7 +139,14 @@ public class TravellingSalesManGUI extends JFrame {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            if(k == counter) {
+                                pomoc = pomoc/2;
+                                next = pomoc;
+                                counter += next;
+                                listToPass.add(genetic.getFinalList().get(k));
+                            }
                         }
+                        new OnePathGUI(listToPass);
                     }
                 };
                 Thread paintThread = new Thread(paintController);
@@ -148,6 +160,12 @@ public class TravellingSalesManGUI extends JFrame {
                 random.way();
                 paintcheck = true;
                 panel1.repaint();
+//                OnePathGUI ramka = new OnePathGUI(random.getFinalLIst());
+//                ramka.setContentPane(new OnePathGUI(random.getFinalLIst()).panel );
+//                ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                ramka.pack();
+//                ramka.setVisible(true);
+//                ramka.setSize(798, 570);
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {
