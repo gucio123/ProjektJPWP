@@ -197,6 +197,12 @@ public class TravellingSalesManGUI extends JFrame {
         panel1.add(wyzarzanie);
         panel1.add(zachlanny);
 
+        this.setContentPane(this.panel1);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+        this.setSize(798, 570);
+
     }
 
     public static void main(String[] args) throws IOException {
