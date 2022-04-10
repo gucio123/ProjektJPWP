@@ -19,19 +19,25 @@ public class BackPackGUI extends JFrame {
             super.paintComponent(g);
 
             Graphics2D g2d = (Graphics2D) g;
-//        int fontSize = 20;
-//        Font f = new Font("Arial", Font.BOLD, fontSize);
+            int fontSize = 20;
+            Font f = new Font("Arial", Font.BOLD, fontSize);
 
-//        g2d.setFont(f);
-//        g2d.setColor(Color.BLACK);
+            g2d.setFont(f);
+            g2d.setColor(Color.BLACK);
+            g2d.setBackground(Color.BLUE);
+            g2d.drawString("Items before implementing greedy backpack:", 200, 20);
+            g2d.drawString("Items in backpack after solving the problem:", 200, 250);
+            g2d.drawLine(0, 25, 800, 25);
+            g2d.drawLine(0, 230, 800, 230);
+            g2d.drawLine(0, 260, 800, 260);
             int j = 0;
             for (int k = 0; k < 8; k++) {
-                if(k%2 == 0)
-                    g2d.drawImage(images[k], 0 + j, 0, null);
+                if (k % 2 == 0)
+                    g2d.drawImage(images[k], 0 + j, 40, null);
                 else
-                    g2d.drawImage(images[k], 0 + j, 80, null);
-
+                    g2d.drawImage(images[k], 0 + j, 120, null);
                 j += 80;
+
             }
         }
     };
@@ -46,7 +52,7 @@ public class BackPackGUI extends JFrame {
         this.setContentPane(this.panel3);
         this.pack();
         this.setVisible(true);
-        this.setSize(798, 570);
+        this.setSize(800, 570);
     }
 
 
@@ -56,6 +62,7 @@ public class BackPackGUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(798, 570);
+        frame.setSize(800, 570);
+        frame.setBackground(Color.CYAN);    // nie dziala to idk czemu
     }
 }

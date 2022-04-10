@@ -4,9 +4,9 @@ import java.util.List;
 
 public class GreedyBackpack {
 
-    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Skarpety",1, 2), new Items("taśmy",2, 5), new Items("Tank-top",2, 8),
-            new Items("Pas",2, 5), new Items("rekawice",1, 1), new Items("Białko",4, 8),
-            new Items("Trenbolon",6, 18), new Items("Kreatyna",5, 10), new Items("tygrys bubblegum",4, 6)));
+    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Zegarek",2, 8),
+            new Items("Laptop",4, 12), new Items("jablko",1, 1), new Items("Hantelka",4, 8),
+            new Items("diament",3, 18), new Items("Zloto",7, 16), new Items("tygrys bubblegum",10, 16)));
 
 
     private List<Items> backpack = new ArrayList<>();
