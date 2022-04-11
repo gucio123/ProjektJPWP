@@ -4,9 +4,9 @@ import java.util.List;
 
 public class GreedyBackpack {
 
-    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Skarpety",1, 2), new Items("taśmy",2, 5), new Items("Tank-top",2, 8),
-            new Items("Pas",2, 5), new Items("rekawice",1, 1), new Items("Białko",4, 8),
-            new Items("Trenbolon",6, 18), new Items("Kreatyna",5, 10), new Items("tygrys bubblegum",4, 6)));
+    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Zegarek",2, 8),
+            new Items("Laptop",4, 12), new Items("jablko",1, 1), new Items("Hantelka",4, 8),
+            new Items("diament",3, 18), new Items("Zloto",7, 16), new Items("tygrys bubblegum",10, 16)));
 
 
     private List<Items> backpack = new ArrayList<>();
@@ -25,31 +25,30 @@ public class GreedyBackpack {
     }
 
     public void greedyBackpack() {
-        GreedyBackpack items = new GreedyBackpack();
-        for (int k = 0; k < items.getItems().toArray().length; k++) {
+        for (int k = 0; k < this.getItems().toArray().length; k++) {
             double maxi = 0;
             int index = 0;
             int bkpkMaxCapacity = 20;
-            for (int i = 0; i < items.getItems().toArray().length; i++) {
-                if(items.backpack.contains(items.getItems().get(i))){
+            for (int i = 0; i < this.getItems().toArray().length; i++) {
+                if(this.backpack.contains(this.getItems().get(i))){
                     continue;
                 }
-                wage = items.getItems().get(i).getValue() / items.getItems().get(i).getWeight();
+                wage = this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
                 if (wage > maxi) {
                     maxi = wage;
                     index = i;
                 }
-                if (i == items.getItems().toArray().length - 1) {
-                    if (bkpkCapacity + items.getItems().get(i).getWeight() < 20) {
-                        items.backpack.add(items.getItems().get(index));
-                        bkpkCapacity += items.backpack.get(temp).getWeight();
+                if (i == this.getItems().toArray().length - 1) {
+                    if (bkpkCapacity + this.getItems().get(i).getWeight() < 20) {
+                        this.backpack.add(this.getItems().get(index));
+                        bkpkCapacity += this.backpack.get(temp).getWeight();
                         temp++;
                     }
                 }
             }
         }
-        for(int m=0;m <items.backpack.toArray().length;m++){
-            System.out.println(items.backpack.get(m).getName());
+        for(int m=0;m <this.backpack.toArray().length;m++){
+            System.out.println(this.backpack.get(m).getName());
         }
     }
     public static void main(String[] args) {

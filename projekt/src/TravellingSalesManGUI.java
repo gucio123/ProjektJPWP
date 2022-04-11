@@ -1,16 +1,12 @@
-import javax.imageio.ImageIO;
-import javax.print.attribute.standard.RequestingUserName;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TravellingSalesManGUI extends JFrame {
 
@@ -31,9 +27,9 @@ public class TravellingSalesManGUI extends JFrame {
     private GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
     private SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.985);
     private TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
+    private List<List> listToPass = new ArrayList<>();
 
-
-    private JPanel panel1 = new JPanel() {
+    public JPanel panel2 = new JPanel(){
         @Override
         public void paint(Graphics g) {
             super.paintComponent(g);
@@ -101,7 +97,7 @@ public class TravellingSalesManGUI extends JFrame {
     public TravellingSalesManGUI() {
         ImageIcon mapa = new ImageIcon("PROJEKT/map/mapka.png");
         map = mapa.getImage();
-        panel1.addMouseListener(new MouseAdapter() {
+        panel2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -114,27 +110,37 @@ public class TravellingSalesManGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 greedy.greedyAlgorithm();
                 greedyCheck = true;
-                panel1.repaint();
+                panel2.repaint();
             }
         });
         genetyczny.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 genetic.geneticAlgorithm();
-                panel1.repaint();
+                panel2.repaint();
                 geneticCheck = true;
                 Runnable paintController = new Runnable() {
                     @Override
                     public void run() {
+                        int counter = 16384;
+                        int pomoc = 16384;
+                        int next;
                         for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
                             index = k;
                             try {
                                 Thread.sleep(0,10);
-                                panel1.repaint();
+                                panel2.repaint();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            if(k == counter) {
+                                pomoc = pomoc/2;
+                                next = pomoc;
+                                counter += next;
+                                listToPass.add(genetic.getFinalList().get(k));
+                            }
                         }
+                        new OnePathGUI(listToPass);
                     }
                 };
                 Thread paintThread = new Thread(paintController);
@@ -147,7 +153,13 @@ public class TravellingSalesManGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 random.way();
                 paintcheck = true;
-                panel1.repaint();
+                panel2.repaint();
+//                OnePathGUI ramka = new OnePathGUI(random.getFinalLIst());
+//                ramka.setContentPane(new OnePathGUI(random.getFinalLIst()).panel );
+//                ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                ramka.pack();
+//                ramka.setVisible(true);
+//                ramka.setSize(798, 570);
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {
@@ -155,7 +167,7 @@ public class TravellingSalesManGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 annealing = true;
                 anneal.algorithm();
-                panel1.repaint();
+                panel2.repaint();
                 Runnable paintController = new Runnable() {
                     @Override
                     public void run() {
@@ -163,7 +175,7 @@ public class TravellingSalesManGUI extends JFrame {
                             index = k;
                             try {
                                 Thread.sleep(50);
-                                panel1.repaint();
+                                panel2.repaint();
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -174,16 +186,21 @@ public class TravellingSalesManGUI extends JFrame {
                 paintThread.start();
             }
         });
-        panel1.add(Losowo);
-        panel1.add(genetyczny);
-        panel1.add(wyzarzanie);
-        panel1.add(zachlanny);
+        panel2.add(Losowo);
+        panel2.add(genetyczny);
+        panel2.add(wyzarzanie);
+        panel2.add(zachlanny);
+
+        this.setContentPane(this.panel2);
+        this.pack();
+        this.setVisible(true);
+        this.setSize(798, 570);
 
     }
 
     public static void main(String[] args) throws IOException {
         TravellingSalesManGUI frame = new TravellingSalesManGUI();
-        frame.setContentPane(new TravellingSalesManGUI().panel1);
+        frame.setContentPane(new TravellingSalesManGUI().panel2);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
