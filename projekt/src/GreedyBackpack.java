@@ -4,14 +4,19 @@ import java.util.List;
 
 public class GreedyBackpack {
 
-    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(new Items("Zegarek",2, 8),
-            new Items("Laptop",4, 12), new Items("jablko",1, 1), new Items("Hantelka",4, 8),
-            new Items("diament",3, 18), new Items("Zloto",7, 16), new Items("tygrys bubblegum",10, 16)));
+    public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
+            new Items("Jablko", 1, 1),
+            new Items("Diament", 3, 18),
+            new Items("Zloto", 7, 16),
+            new Items("Laptop", 4, 12),
+            new Items("Hantelka", 4, 8),
+            new Items("Zegarek", 2, 8),
+            new Items("Serwer", 10, 16)));
 
 
-    private List<Items> backpack = new ArrayList<>();
-    private List<Items> items = listOfItems;
-    private double wage;
+    public List<Items> backpack = new ArrayList<>();
+    public List<Items> items = listOfItems;
+    private float wage;
     private int bkpkMaxCapacity = 20;
     private int bkpkCapacity = 0;
     private int temp = 0;
@@ -30,7 +35,7 @@ public class GreedyBackpack {
             int index = 0;
             int bkpkMaxCapacity = 20;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
-                if(this.backpack.contains(this.getItems().get(i))){
+                if (this.backpack.contains(this.getItems().get(i))) {
                     continue;
                 }
                 wage = this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
@@ -39,7 +44,7 @@ public class GreedyBackpack {
                     index = i;
                 }
                 if (i == this.getItems().toArray().length - 1) {
-                    if (bkpkCapacity + this.getItems().get(i).getWeight() < 20) {
+                    if (bkpkCapacity + this.getItems().get(i).getWeight() <= 20) {
                         this.backpack.add(this.getItems().get(index));
                         bkpkCapacity += this.backpack.get(temp).getWeight();
                         temp++;
@@ -47,10 +52,11 @@ public class GreedyBackpack {
                 }
             }
         }
-        for(int m=0;m <this.backpack.toArray().length;m++){
+        for (int m = 0; m < this.backpack.toArray().length; m++) {
             System.out.println(this.backpack.get(m).getName());
         }
     }
+
     public static void main(String[] args) {
         GreedyBackpack backpack = new GreedyBackpack();
         backpack.greedyBackpack();
