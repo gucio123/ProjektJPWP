@@ -154,12 +154,6 @@ public class TravellingSalesManGUI extends JFrame {
                 random.way();
                 paintcheck = true;
                 panel2.repaint();
-//                OnePathGUI ramka = new OnePathGUI(random.getFinalLIst());
-//                ramka.setContentPane(new OnePathGUI(random.getFinalLIst()).panel );
-//                ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                ramka.pack();
-//                ramka.setVisible(true);
-//                ramka.setSize(798, 570);
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {

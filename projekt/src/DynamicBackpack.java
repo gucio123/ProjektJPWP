@@ -5,18 +5,13 @@ import java.util.List;
 public class DynamicBackpack {
     private List<Items> finalList = new ArrayList<>();
     public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
-//            new Items("koszula", 7, 75), new Items("spodnie", 8, 150), new Items("sweter", 6, 250)
-//            , new Items("czapka", 4, 35), new Items("kapielowki", 3, 10), new Items("buty", 9, 100)
-            new Items("Skarpety",1, 2),
-            new Items("taśmy",2, 5),
-            new Items("Tank-top",2, 8),
-            new Items("Pas",2, 5),
-            new Items("rekawice",1, 1),
-            new Items("Białko",4, 8),
-            new Items("Trenbolon",6, 18),
-            new Items("Kreatyna",5, 10),
-            new Items("tygrys bubblegum",4, 6)
-            ));
+            new Items("Jablko", 1, 1),
+            new Items("Diament", 3, 18),
+            new Items("Zloto", 7, 16),
+            new Items("Laptop", 4, 12),
+            new Items("Hantelka", 4, 8),
+            new Items("Zegarek", 2, 8),
+            new Items("Serwer", 10, 16)));
     private int capacity = 20;
     private int[][] pij = new int[listOfItems.toArray().length][capacity];
     private int[][] qij = new int[listOfItems.toArray().length][capacity];
