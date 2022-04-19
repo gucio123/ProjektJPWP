@@ -16,6 +16,13 @@ public class mainGUI extends JFrame {
                 new TravellingSalesManGUI();
             }
         });
+
+        backpackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new BackPackGUI();
+            }
+        });
     }
 
     public static void main(String[] args) throws IOException {
