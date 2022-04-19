@@ -31,7 +31,7 @@ public class GreedyBackpack {
 
     public void greedyBackpack() {
         for (int k = 0; k < this.getItems().toArray().length; k++) {
-            double maxi = 0;
+            float maxi = 0;
             int index = 0;
             int bkpkMaxCapacity = 20;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
