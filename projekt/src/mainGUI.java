@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import javax.swing.JFrame;
 
 public class mainGUI extends JFrame {
     private JPanel panel1;
@@ -20,7 +21,12 @@ public class mainGUI extends JFrame {
         backpackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BackPackGUI();
+                new BackPackGUI2();
+                JFrame frame = new JFrame("chuj");
+                frame.setContentPane(new BackPackGUI2().getPanel4());
+                frame.setVisible(true);
+                frame.pack();
+                frame.setSize(500, 200);
             }
         });
     }
