@@ -122,6 +122,7 @@ public class GeneticTravellingSalesman {
     }
 
     public void geneticAlgorithm(){
+        long start = System.nanoTime();
         this.firstPopulation();
         for (int i = 0; i < this.list.toArray().length; i++) {
             this.fittness(this.list.get(i));
@@ -133,7 +134,10 @@ public class GeneticTravellingSalesman {
             for(int i = 0; i < list.toArray().length; i++)
                 this.finalList.add(this.list.get(i));
         }
-        System.out.println(getFinalList());
+        long end = System.nanoTime();
+        long time = end - start;
+//        System.out.println(getFinalList());
+        System.out.println(time);
     }
 
     public static void main(String[] args) {

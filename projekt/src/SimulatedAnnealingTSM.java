@@ -46,6 +46,7 @@ public class SimulatedAnnealingTSM {
         this.currentLength = this.calculatePath(currentPath);
     }
     public void algorithm(){
+        long start = System.nanoTime();
         this.bestLength = this.calculatePath(this.currentPath);
         this.currentLength = this.calculatePath(this.currentPath);
         this.temperature = this.startingTemperature;
@@ -58,14 +59,17 @@ public class SimulatedAnnealingTSM {
                     this.unDoSwap();
                     this.temperature /= this.temperatureRate;
                 }
-                System.out.println("Droga po warunku odwrotu" + this.currentPath + " " + this.currentLength);
-                System.out.println(i);
+//                System.out.println("Droga po warunku odwrotu" + this.currentPath + " " + this.currentLength);
+//                System.out.println(i);
             }
             this.temperature *= this.temperatureRate;
             this.finalList.add(this.currentPath);
             this.listOfTemperatures.add(temperature);
             this.listOfLenghts.add(this.currentLength);
         }
+        long end = System.nanoTime();
+        long time = end - start;
+        System.out.println(time);
     }
 
     public List<Float> getListOfTemperatures() {
@@ -91,6 +95,6 @@ public class SimulatedAnnealingTSM {
     public static void main(String[] args) {
         SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.985);
         anneal.algorithm();
-        System.out.println(anneal.bestLength);
+//        System.out.println(anneal.bestLength);
     }
 }
