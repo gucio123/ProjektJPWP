@@ -87,4 +87,10 @@ public class SimulatedAnnealingTSM {
     public float getTemperature() {
         return temperature;
     }
+
+    public static void main(String[] args) {
+        SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.985);
+        anneal.algorithm();
+        System.out.println(anneal.bestLength);
+    }
 }
