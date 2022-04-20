@@ -44,7 +44,7 @@ public class GreedyBackpack {
                     index = i;
                 }
                 if (i == this.getItems().toArray().length - 1) {
-                    if (bkpkCapacity + this.getItems().get(i).getWeight() <= 20) {
+                    if (bkpkCapacity + this.getItems().get(index).getWeight() <= 20) {
                         this.backpack.add(this.getItems().get(index));
                         bkpkCapacity += this.backpack.get(temp).getWeight();
                         temp++;
