@@ -49,6 +49,7 @@ public class BackPackGUI extends JFrame {
                 if (greedy.backpack.contains(greedy.listOfItems.get(k))) {
                     g2d.drawImage(images[k], m, 300, null);
                     g2d.drawString("Wage: " + greedy.backpack.get(n).getValue() / greedy.items.get(n).getWeight(), m, 450);
+                    g2d.drawString("Weight: " + greedy.backpack.get(n).getWeight(),m,470);
                     n++;
                     m += 120;
                 }
