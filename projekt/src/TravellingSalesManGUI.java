@@ -194,11 +194,7 @@ public class TravellingSalesManGUI extends JFrame {
 
     public static void main(String[] args) throws IOException {
         TravellingSalesManGUI frame = new TravellingSalesManGUI();
-        frame.setContentPane(new TravellingSalesManGUI().panel2);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(798, 570);
+
     }
 }
 

@@ -4,12 +4,11 @@ public class GeneticTravellingSalesman {
     public List<List> list = new ArrayList<>();
     private List<List> finalList = new ArrayList<>();
     public void firstPopulation() {
-        for (int i = 0; i < 32768; i++) {
+        for (int i = 0; i < 32768 ; i++) {
             TravellingSalesManRandom randomway = new TravellingSalesManRandom("Waszyngton");
             randomway.way();
             list.add(randomway.getFinalLIst());
         }
-//        System.out.println(list);
     }
     public void mutation(List<Object> onePath){
         Random r = new Random();
@@ -45,7 +44,6 @@ public class GeneticTravellingSalesman {
                 index = r.nextInt(population.toArray().length);
                 tournament.add(population.get(index));
                 population.remove(index);
-//            System.out.println("Turniej :" + tournament);
                 List winner;
                 if ((int) tournament.get(0).get(16) <= (int) tournament.get(1).get(16))
                     winner = tournament.get(0);
@@ -83,12 +81,10 @@ public class GeneticTravellingSalesman {
         List<List> children = new ArrayList<>();
         List<List> copy = new ArrayList<>(selectedPop);
         selectedPop.clear();
-//        Collections.shuffle(selectedPop);
         for (int i = 0; i < copy.toArray().length - 1; i += 2) {
             List<List> parents = new ArrayList<>();
             parents.add(0,new ArrayList(copy.get(i)));
             parents.add(1,new ArrayList(copy.get(i + 1)));
-//            System.out.println("Przed krosowaniem " + parents);
             parents = this.crossover(parents);
             this.mutation(parents.get(0));
             children.add(parents.get(0));
@@ -99,25 +95,12 @@ public class GeneticTravellingSalesman {
             int indeks = random.nextInt(16);
             parents.add(0,new ArrayList(copy.get(i + 1)));
             parents.add(1,new ArrayList(copy.get(i)));
-//                for (int k = 0; k <= indeks; k++) {
-//                    City m = (City) parents.get(0).get(k);
-//                    int pierwsze = m.getNumber();
-//                    City n = (City) parents.get(1).get(k);
-//                    int drugie = n.getNumber();
-//                    for (int x = k; x < 16; x++) {
-//                            if (((City) parents.get(1).get(x)).getNumber() == pierwsze) {
-//                                Collections.swap(parents.get(1), k, x);
-//                            }
-//                    }
-//                }
             parents = this.crossover(parents);
             this.mutation(parents.get(0));
             children.add(parents.get(0));
             children.get(i+1).remove(16);
             this.fittness(children.get(i+1));
-//                    System.out.println("Po krosowaniu " + children);
-//                    System.out.println();
-                }
+        }
 
         return children;
     }
