@@ -1,17 +1,10 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class BackPackGUI extends JFrame {
+public class greedyGUI extends JFrame {
     public Image[] images = new Image[8];
     private GreedyBackpack greedy = new GreedyBackpack();
-    private DynamicBackpack dynamic = new DynamicBackpack();
 
     private JPanel panel3 = new JPanel() {
         @Override
@@ -62,7 +55,7 @@ public class BackPackGUI extends JFrame {
     };
 
 
-    public BackPackGUI() {
+    public greedyGUI() {
         for (int i = 0; i < 7; i++) {
             int index = i + 1;
             ImageIcon img = new ImageIcon("PROJEKT/items/img" + index + ".png");
@@ -78,7 +71,7 @@ public class BackPackGUI extends JFrame {
 
 
     public static void main(String[] args) throws IOException {
-        BackPackGUI frame = new BackPackGUI();
+        greedyGUI frame = new greedyGUI();
 //        frame.setContentPane(new BackPackGUI().panel3);
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        frame.pack();

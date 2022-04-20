@@ -21,9 +21,9 @@ public class mainGUI extends JFrame {
         backpackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BackPackGUI2();
+                new backpackGUI();
                 JFrame frame = new JFrame("chuj");
-                frame.setContentPane(new BackPackGUI2().getPanel4());
+                frame.setContentPane(new backpackGUI().getPanel4());
                 frame.setVisible(true);
                 frame.pack();
                 frame.setSize(500, 200);
