@@ -22,7 +22,7 @@ public class mainGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new backpackGUI();
-                JFrame frame = new JFrame("chuj");
+                JFrame frame = new JFrame();
                 frame.setContentPane(new backpackGUI().getPanel4());
                 frame.setVisible(true);
                 frame.pack();

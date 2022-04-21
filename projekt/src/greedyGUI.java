@@ -18,31 +18,33 @@ public class greedyGUI extends JFrame {
             g2d.setFont(f);
             g2d.setColor(Color.BLACK);
             g2d.setBackground(Color.BLUE);
-            g2d.drawString("Items before implementing greedy backpack:", 200, 20);
-            g2d.drawString("Items in backpack after solving the problem:", 200, 260);
-            g2d.drawLine(0, 25, 800, 25);
-            g2d.drawLine(0, 240, 800, 240);
-            g2d.drawLine(0, 270, 800, 270);
+            g2d.drawString("Items before implementing greedy backpack:", 300, 20);
+            g2d.drawString("Items in backpack after solving the problem:", 300, 260);
+            g2d.drawLine(0, 25, 900, 25);
+            g2d.drawLine(0, 240, 900, 240);
+            g2d.drawLine(0, 270, 900, 270);
             int j = 0;
-            int m = 150;
+            int m = 100;
             int n = 0;
             for (int k = 0; k < 7; k++) {
                 if (k % 2 == 0) {
-                    g2d.drawImage(images[k], 0 + j, 40, null);
-                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(), 10 + j, 130);
-                    g2d.drawString("Wage: " + (double)greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight(), 10 + j, 150);
+                    g2d.drawImage(images[k], 50 + j, 40, null);
+                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(), 60 + j, 140);
+                    g2d.drawString("Wage: " + (double)(greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight()), 60 + j, 160);
                 } else {
-                    g2d.drawImage(images[k], 0 + j, 120, null);
-                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(), 10 + j, 210);
-                    g2d.drawString("Wage: " + (double)greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight(), 10 + j, 230);
+                    g2d.drawImage(images[k], 50 + j, 120, null);
+                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(), 60 + j, 210);
+                    g2d.drawString("Wage: " + (double)(greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight()), 60 + j, 230);
                 }
                 j += 120;
 
 
                 if (greedy.backpack.contains(greedy.listOfItems.get(k))) {
                     g2d.drawImage(images[k], m, 300, null);
-                    g2d.drawString("Wage: " + greedy.backpack.get(n).getValue() / greedy.items.get(n).getWeight(), m, 450);
-                    g2d.drawString("Weight: " + greedy.backpack.get(n).getWeight(),m,470);
+//                    g2d.drawString("Weight: " + (double)greedy.backpack.get(n).getWeight(),m,450);
+                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(),m,450);
+//                    g2d.drawString("Wage: " + (double)(greedy.backpack.get(n).getValue() / greedy.backpack.get(n).getWeight()), m, 470);
+                    g2d.drawString("Wage: " + (double)(greedy.listOfItems.get(k).getValue() / greedy.listOfItems.get(k).getWeight()), m, 470);
                     n++;
                     m += 120;
                 }
@@ -61,7 +63,7 @@ public class greedyGUI extends JFrame {
         this.setContentPane(this.panel3);
         this.pack();
         this.setVisible(true);
-        this.setSize(800, 570);
+        this.setSize(900, 570);
         this.setBackground(Color.cyan);
     }
 

@@ -29,7 +29,7 @@ public class backpackGUI {
 
 
     public static void main(String[] args) throws IOException {
-        JFrame frame = new JFrame("chuj");
+        JFrame frame = new JFrame();
         frame.setContentPane(new backpackGUI().panel4);
         frame.setVisible(true);
         frame.pack();

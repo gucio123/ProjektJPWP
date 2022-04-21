@@ -41,7 +41,6 @@ public class GreedyBackpack {
         for (int k = 0; k < this.getItems().toArray().length; k++) {
             float maxi = 0;
             int index = 0;
-            int bkpkMaxCapacity = 20;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
                 if (this.backpack.contains(this.getItems().get(i))) {
                     continue;
@@ -52,7 +51,7 @@ public class GreedyBackpack {
                     index = i;
                 }
                 if (i == this.getItems().toArray().length - 1) {
-                    if (bkpkCapacity + this.getItems().get(index).getWeight() <= 20) {
+                    if (bkpkCapacity + this.getItems().get(index).getWeight() <= bkpkMaxCapacity) {
                         this.backpack.add(this.getItems().get(index));
                         bkpkCapacity += this.backpack.get(temp).getWeight();
                         temp++;
