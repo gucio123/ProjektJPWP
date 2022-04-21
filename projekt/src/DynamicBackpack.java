@@ -5,13 +5,13 @@ import java.util.List;
 public class DynamicBackpack {
     private List<Items> finalList = new ArrayList<>();
     public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
-            new Items("Jablko", 1, 1),
-            new Items("Diament", 3, 18),
-            new Items("Zloto", 7, 16),
-            new Items("Laptop", 4, 12),
+            new Items("Jablko", 1, 2),
+            new Items("Diament", 2, 5),
+            new Items("Zloto", 2, 8),
+            new Items("Laptop", 2, 5),
             new Items("Hantelka", 4, 8),
-            new Items("Zegarek", 2, 8),
-            new Items("Serwer", 10, 16)));
+            new Items("Zegarek", 6, 18),
+            new Items("Serwer", 5, 10)));
     private int capacity = 20;
     private int[][] pij = new int[listOfItems.toArray().length][capacity];
     private int[][] qij = new int[listOfItems.toArray().length][capacity];
@@ -55,6 +55,27 @@ public class DynamicBackpack {
             actualCap -= listOfItems.get(qij[listOfItems.toArray().length-1][actualCap - 1] - 1).getWeight();
         }
     }
+
+    public List<Items> getFinalList() {
+        return finalList;
+    }
+
+    public List<Items> getListOfItems() {
+        return listOfItems;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int[][] getPij() {
+        return pij;
+    }
+
+    public int[][] getQij() {
+        return qij;
+    }
+
     public static void main(String[] args) {
         DynamicBackpack back = new DynamicBackpack();
         back.dynamic();
