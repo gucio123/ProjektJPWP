@@ -47,10 +47,6 @@ public class greedyGUI extends JFrame {
                     m += 120;
                 }
             }
-//            g2d.drawImage(images[2], 100, 300, null);
-//            g2d.drawImage(images[6], 180, 300, null);
-//            g2d.drawImage(images[4], 260, 300, null);
-//            g2d.drawImage(images[5], 340, 300, null);
         }
     };
 
@@ -72,11 +68,5 @@ public class greedyGUI extends JFrame {
 
     public static void main(String[] args) throws IOException {
         greedyGUI frame = new greedyGUI();
-//        frame.setContentPane(new BackPackGUI().panel3);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setVisible(true);
-//        frame.setSize(800, 570);
-//        frame.setBackground(Color.CYAN);    // nie dziala to idk czemu
     }
 }
