@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.*;
+/*import static org.junit.jupiter.api.Assertions.*;
 //import static org.junit.Assert.*;
 import org.junit.jupiter.api.Test;
 
@@ -17,18 +17,4 @@ class Testing {
 //    Assert.assertEquals(wayLength, randomWay.getWayLenght());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+*/
