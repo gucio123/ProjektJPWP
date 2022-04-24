@@ -80,7 +80,7 @@ public class GeneticTravellingSalesman {
     public List<List> cross(List<List> selectedPop) {
         List<List> children = new ArrayList<>();
         List<List> copy = new ArrayList<>(selectedPop);
-        selectedPop.clear();
+//        selectedPop.clear();
         for (int i = 0; i < copy.toArray().length - 1; i += 2) {
             List<List> parents = new ArrayList<>();
             parents.add(0,new ArrayList(copy.get(i)));
@@ -138,6 +138,10 @@ public class GeneticTravellingSalesman {
         long time = end - start;
 //        System.out.println(getFinalList());
         System.out.println(time);
+    }
+
+    public void zadanie1(){
+//    tutaj nalezy wpisac algortytm
     }
 
     public static void main(String[] args) {
