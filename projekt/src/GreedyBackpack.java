@@ -7,13 +7,12 @@ public class GreedyBackpack {
     public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
 
             new Items("Jablko", 1, 2),
-            new Items("Diament", 2, 5),
+            new Items("Diament", 2, 6),
             new Items("Zloto", 2, 8),
             new Items("Laptop", 2, 5),
             new Items("Hantelka", 4, 8),
             new Items("Zegarek", 6, 18),
             new Items("Serwer", 5, 10)));
-
 
     public List<Items> backpack = new ArrayList<>();
     public List<Items> items = listOfItems;
@@ -36,6 +35,7 @@ public class GreedyBackpack {
             int index = 0;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
                 if (this.backpack.contains(this.getItems().get(i))) {
+
                     continue;
                 }
                 wage = this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
@@ -43,6 +43,15 @@ public class GreedyBackpack {
                     maxi = wage;
                     index = i;
                 }
+
+//                zad4 edytuj greedy tak aby wyswietlal rownie optymalnie jak dynamic, zle zrobione to jest
+//
+//                else if (wage == maxi) {
+//                    if (this.getItems().get(i).getValue() > this.getItems().get(i-1).getValue()){
+//                        maxi = wage;
+//                        index = i;
+//                    }
+//                }
                 if (i == this.getItems().toArray().length - 1) {
                     if (bkpkCapacity + this.getItems().get(index).getWeight() <= bkpkMaxCapacity) {
                         this.backpack.add(this.getItems().get(index));

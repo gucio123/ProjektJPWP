@@ -29,12 +29,12 @@ public class greedyGUI extends JFrame {
             for (int k = 0; k < 7; k++) {
                 if (k % 2 == 0) {
                     g2d.drawImage(images[k], 50 + j, 40, null);
-                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(), 60 + j, 140);
-                    g2d.drawString("Wage: " + (double)(greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight()), 60 + j, 160);
+                    g2d.drawString("Weight: " + (double) (greedy.listOfItems.get(k).getWeight()), 60 + j, 140);
+                    g2d.drawString("Wage: " + (double) (greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight()), 60 + j, 160);
                 } else {
                     g2d.drawImage(images[k], 50 + j, 120, null);
-                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(), 60 + j, 210);
-                    g2d.drawString("Wage: " + (double)(greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight()), 60 + j, 230);
+                    g2d.drawString("Weight: " + (double) (greedy.listOfItems.get(k).getWeight()), 60 + j, 210);
+                    g2d.drawString("Wage: " + (double) (greedy.listOfItems.get(k).getValue()/greedy.listOfItems.get(k).getWeight()), 60 + j, 230);
                 }
                 j += 120;
 
@@ -42,9 +42,9 @@ public class greedyGUI extends JFrame {
                 if (greedy.backpack.contains(greedy.listOfItems.get(k))) {
                     g2d.drawImage(images[k], m, 300, null);
 //                    g2d.drawString("Weight: " + (double)greedy.backpack.get(n).getWeight(),m,450);
-                    g2d.drawString("Weight: " + (double)greedy.listOfItems.get(k).getWeight(),m,450);
+                    g2d.drawString("Weight: " + (double) (greedy.listOfItems.get(k).getWeight()),m,450);
 //                    g2d.drawString("Wage: " + (double)(greedy.backpack.get(n).getValue() / greedy.backpack.get(n).getWeight()), m, 470);
-                    g2d.drawString("Wage: " + (double)(greedy.listOfItems.get(k).getValue() / greedy.listOfItems.get(k).getWeight()), m, 470);
+                    g2d.drawString("Wage: " + (double) (greedy.listOfItems.get(k).getValue() / greedy.listOfItems.get(k).getWeight()), m, 470);
                     n++;
                     m += 120;
                 }

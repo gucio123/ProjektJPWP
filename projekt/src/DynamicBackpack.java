@@ -12,6 +12,14 @@ public class DynamicBackpack {
             new Items("Hantelka", 4, 8),
             new Items("Zegarek", 6, 18),
             new Items("Serwer", 5, 10)));
+
+//            new Items("Jablko", 1, 1),
+//            new Items("Diament", 3, 15),
+//            new Items("Zloto", 6, 12),
+//            new Items("Laptop", 6, 9),
+//            new Items("Hantelka", 7, 4 ),
+//            new Items("Zegarek", 4, 12),
+//            new Items("Serwer", 10, 40)));
     private int capacity = 20;
     private int[][] pij = new int[listOfItems.toArray().length][capacity];
     private int[][] qij = new int[listOfItems.toArray().length][capacity];
