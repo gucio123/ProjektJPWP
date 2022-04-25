@@ -10,12 +10,12 @@ public class GreedyBackpack {
             new Items("Diament", 2, 6),
             new Items("Zloto", 2, 8),
             new Items("Laptop", 2, 5),
-            new Items("Hantelka", 4, 8),
+            new Items("Hantelka", 4, 7),
             new Items("Zegarek", 6, 18),
             new Items("Jablko", 1, 2)));
 
     public List<Items> backpack = new ArrayList<>();
-    public List<Items> items = listOfItems;
+    public List<Items> items = new ArrayList<>(listOfItems);
     private float wage;
     private int bkpkMaxCapacity = 20;
     private int bkpkCapacity = 0;
@@ -34,10 +34,6 @@ public class GreedyBackpack {
             float maxi = 0;
             int index = 0;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
-                if (this.backpack.contains(this.getItems().get(i))) {
-
-                    continue;
-                }
                 wage = this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
                 if (wage > maxi) {
                     maxi = wage;
@@ -55,6 +51,8 @@ public class GreedyBackpack {
                         this.backpack.add(this.getItems().get(index));
                         bkpkCapacity += this.backpack.get(temp).getWeight();
                         temp++;
+                        this.getItems().remove(index);
+                        k--;
                     }
                 }
             }
