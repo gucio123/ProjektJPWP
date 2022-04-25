@@ -4,11 +4,11 @@ public class GeneticTravellingSalesman {
     public List<List> list = new ArrayList<>();
     private List<List> finalList = new ArrayList<>();
     public int numberInFirst = 32768;
+    TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     public void firstPopulation() {
         for (int i = 0; i < numberInFirst ; i++) { //32768
-            TravellingSalesManRandom randomway = new TravellingSalesManRandom("Waszyngton");
-            randomway.way();
-            list.add(randomway.getFinalLIst());
+            random.way();
+            list.add(random.getFinalLIst());
         }
     }
     public void mutation(List<Object> onePath){
@@ -104,6 +104,10 @@ public class GeneticTravellingSalesman {
         }
 
         return children;
+    }
+
+    public TravellingSalesManRandom getRandom() {
+        return random;
     }
 
     public void setList(List<List> list) {

@@ -10,7 +10,14 @@ import java.util.List;
 public class Zadanie2 extends JFrame {
     private List<City> lista = new ArrayList<>();
     private JButton button =  new JButton("przycisk");
+    private JButton button2 =  new JButton("zachlanny");
     TravellingSalesManRandom random = new TravellingSalesManRandom("1");
+    TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
+
+    private boolean paintcheck = false;
+    private boolean geneticCheck = false;
+    private boolean annealing = false;
+    private boolean greedyCheck = false;
     private int counter;
     private Image map;
     private Image dot;
@@ -19,26 +26,47 @@ public class Zadanie2 extends JFrame {
         public void paint(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
             g2.drawImage(map, 0, 0, null);
+            g2.setColor(Color.WHITE);
             for(int i = 0; i < lista.toArray().length; i++){
-                g2.setColor(Color.white);
+//                g2.setColor(Color.white);
                 g2.drawImage(dot, lista.get(i).getX() - 10, lista.get(i).getY() - 10, null);
             }
-            for (int i = 0; i < random.getFinalLIst().toArray().length - 1; i++) {
-                g2.setColor(Color.WHITE);
-                g2.drawLine(random.getFinalLIst().get(i).getX(), random.getFinalLIst().get(i).getY(),
-                        random.getFinalLIst().get(i + 1).getX(), random.getFinalLIst().get(i + 1).getY());
-                g2.setColor(Color.yellow);
+            if (paintcheck) {
+                for (int i = 0; i < random.getFinalLIst().toArray().length - 1; i++) {
+                    g2.setColor(Color.WHITE);
+                    g2.drawLine(random.getFinalLIst().get(i).getX(), random.getFinalLIst().get(i).getY(),
+                            random.getFinalLIst().get(i + 1).getX(), random.getFinalLIst().get(i + 1).getY());
+                    g2.setColor(Color.yellow);
 
-                g2.drawString(String.valueOf(i + 1), ((random.getFinalLIst().get(i).getX()) + random.getFinalLIst().get(i + 1).getX()) / 2,
-                        ((random.getFinalLIst().get(i).getY()) + random.getFinalLIst().get(i + 1).getY()) / 2);
+                    g2.drawString(String.valueOf(i + 1), ((random.getFinalLIst().get(i).getX()) + random.getFinalLIst().get(i + 1).getX()) / 2,
+                            ((random.getFinalLIst().get(i).getY()) + random.getFinalLIst().get(i + 1).getY()) / 2);
+                    g2.setColor(Color.WHITE);
+                }
+                g2.setColor(Color.WHITE);
+                g2.drawString(String.valueOf(random.getWayLenght()), 100, 10);
+            }
+            if(greedyCheck){
+                for(int k=0;k < greedy.getFinalList().toArray().length - 1;k++){
+                    g2.drawLine(greedy.getFinalList().get(k).getX(),
+                            greedy.getFinalList().get(k).getY(),
+                            greedy.getFinalList().get(k+1).getX(),
+                            greedy.getFinalList().get(k+1).getY());
+
+                    g2.setColor(Color.YELLOW);
+                    g2.drawString(String.valueOf(k + 1), ((greedy.getFinalList().get(k).getX()) + greedy.getFinalList().get(k + 1).getX()) / 2,
+                            ((greedy.getFinalList().get(k).getY()) + greedy.getFinalList().get(k + 1).getY()) / 2);
+                    g2.setColor(Color.WHITE);
+                }
+                g2.setColor(Color.YELLOW);
+                g2.drawString(String.valueOf(greedy.getTotalDist()), 50, 10);
                 g2.setColor(Color.WHITE);
             }
-            g2.setColor(Color.WHITE);
-            g2.drawString(String.valueOf(random.getWayLenght()), 100, 10);
         }
     };
 
     public Zadanie2() {
+        panel2.add(button);
+        panel2.add(button2);
         counter = 0;
         ImageIcon mapa = new ImageIcon("PROJEKT/map/black.jpg");
         map = mapa.getImage();
@@ -54,12 +82,22 @@ public class Zadanie2 extends JFrame {
                 panel2.repaint();
             }
         });
-        panel2.add(button);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 random.setList(new ArrayList<>(lista));
                 random.way();
+                paintcheck = true;
+                panel2.repaint();
+            }
+        });
+
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                greedyCheck = true;
+                greedy.setList(new ArrayList<>(lista));
+                greedy.greedyAlgorithm();
                 panel2.repaint();
             }
         });
