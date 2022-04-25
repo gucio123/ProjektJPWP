@@ -15,12 +15,12 @@ public class SimulatedAnnealingTSM {
     private float temperature;
     private List<Float> listOfTemperatures =  new ArrayList<>();
     private List<Integer> listOfLenghts = new ArrayList<>();
+    private TravellingSalesManRandom firstPath = new TravellingSalesManRandom("Waszyngton");
     public SimulatedAnnealingTSM(int numberOfIterations, float startingTemperature, float temperatureRate) {
         this.numberOfIterations = numberOfIterations;
         this.startingTemperature = startingTemperature;
         this.temperatureRate = temperatureRate;
         this.finalList = new ArrayList<>();
-        TravellingSalesManRandom firstPath = new TravellingSalesManRandom("Waszyngton");
         firstPath.way();
         this.currentPath = firstPath.getFinalLIst();
     }
@@ -90,6 +90,10 @@ public class SimulatedAnnealingTSM {
 
     public float getTemperature() {
         return temperature;
+    }
+
+    public TravellingSalesManRandom getFirstPath() {
+        return firstPath;
     }
 
     public static void main(String[] args) {

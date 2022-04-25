@@ -52,6 +52,10 @@ public class TravellingSalesManRandom {
         return list;
     }
 
+    public void setFirstCity(String firstCity) {
+        this.firstCity = firstCity;
+    }
+
     public void setList(List<City> list) {
         this.list = list;
     }

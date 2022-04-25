@@ -11,14 +11,16 @@ public class Zadanie2 extends JFrame {
     private List<City> lista = new ArrayList<>();
     private JButton button =  new JButton("przycisk");
     private JButton button2 =  new JButton("zachlanny");
+    private JButton button3 =  new JButton("genetyczny");
     TravellingSalesManRandom random = new TravellingSalesManRandom("1");
     TravellingSalesmanGreedy greedy = new TravellingSalesmanGreedy();
-
+    GeneticTravellingSalesman genetic = new GeneticTravellingSalesman();
     private boolean paintcheck = false;
     private boolean geneticCheck = false;
     private boolean annealing = false;
     private boolean greedyCheck = false;
     private int counter;
+    private int index;
     private Image map;
     private Image dot;
     public JPanel panel2 = new JPanel(){
@@ -61,12 +63,27 @@ public class Zadanie2 extends JFrame {
                 g2.drawString(String.valueOf(greedy.getTotalDist()), 50, 10);
                 g2.setColor(Color.WHITE);
             }
+
+            if (geneticCheck) {
+                for (int j = 0; j < genetic.getFinalList().get(index).toArray().length - 2; j++) {
+                    g2.drawLine(((City) genetic.getFinalList().get(index).get(j)).getX(),
+                            ((City) genetic.getFinalList().get(index).get(j)).getY(),
+                            ((City) genetic.getFinalList().get(index).get(j + 1)).getX(),
+                            ((City) genetic.getFinalList().get(index).get(j + 1)).getY());
+                }
+                g2.setColor(Color.YELLOW);
+                if(genetic.getFinalList().get(index).toArray().length == 17)
+                    g2.drawString(genetic.getFinalList().get(index).get(16).toString(), 50, 10);
+                g2.setColor(Color.WHITE);
+
+            }
         }
     };
 
     public Zadanie2() {
         panel2.add(button);
         panel2.add(button2);
+        panel2.add(button3);
         counter = 0;
         ImageIcon mapa = new ImageIcon("PROJEKT/map/black.jpg");
         map = mapa.getImage();
@@ -86,6 +103,7 @@ public class Zadanie2 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 random.setList(new ArrayList<>(lista));
+                random.setFirstCity("1");
                 random.way();
                 paintcheck = true;
                 panel2.repaint();
@@ -99,6 +117,34 @@ public class Zadanie2 extends JFrame {
                 greedy.setList(new ArrayList<>(lista));
                 greedy.greedyAlgorithm();
                 panel2.repaint();
+            }
+        });
+
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                geneticCheck = true;
+                genetic.getRandom().setList(new ArrayList<>(lista));
+                genetic.getRandom().setFirstCity("1");
+                genetic.geneticAlgorithm();
+                panel2.repaint();
+
+                Runnable paintController = new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
+                            index = k;
+                            try {
+                                Thread.sleep(0,10);
+                                panel2.repaint();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                };
+                Thread paintThread = new Thread(paintController);
+                paintThread.start();
             }
         });
     }

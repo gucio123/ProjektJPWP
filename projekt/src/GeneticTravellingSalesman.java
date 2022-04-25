@@ -7,6 +7,7 @@ public class GeneticTravellingSalesman {
     TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
     public void firstPopulation() {
         for (int i = 0; i < numberInFirst ; i++) { //32768
+            random = new TravellingSalesManRandom("Waszyngton");
             random.way();
             list.add(random.getFinalLIst());
         }
