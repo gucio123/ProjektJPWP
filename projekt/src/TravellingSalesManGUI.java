@@ -122,8 +122,8 @@ public class TravellingSalesManGUI extends JFrame {
                 Runnable paintController = new Runnable() {
                     @Override
                     public void run() {
-                        int counter = 16384;
-                        int pomoc = 16384;
+                        int counter = genetic.numberInFirst / 2;
+                        int pomoc = genetic.numberInFirst / 2;
                         int next;
                         for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
                             index = k;

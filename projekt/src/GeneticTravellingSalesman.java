@@ -3,8 +3,9 @@ import java.util.*;
 public class GeneticTravellingSalesman {
     public List<List> list = new ArrayList<>();
     private List<List> finalList = new ArrayList<>();
+    public int numberInFirst = 32768;
     public void firstPopulation() {
-        for (int i = 0; i < 32768 ; i++) { //32768
+        for (int i = 0; i < numberInFirst ; i++) { //32768
             TravellingSalesManRandom randomway = new TravellingSalesManRandom("Waszyngton");
             randomway.way();
             list.add(randomway.getFinalLIst());
