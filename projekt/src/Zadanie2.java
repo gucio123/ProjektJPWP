@@ -13,6 +13,7 @@ public class Zadanie2 extends JFrame {
     TravellingSalesManRandom random = new TravellingSalesManRandom("1");
     private int counter;
     private Image map;
+    private Image dot;
     public JPanel panel2 = new JPanel(){
         @Override
         public void paint(Graphics g) {
@@ -20,7 +21,7 @@ public class Zadanie2 extends JFrame {
             g2.drawImage(map, 0, 0, null);
             for(int i = 0; i < lista.toArray().length; i++){
                 g2.setColor(Color.white);
-                g2.drawString(String.valueOf(i), lista.get(i).getX(), lista.get(i).getY());
+                g2.drawImage(dot, lista.get(i).getX() - 10, lista.get(i).getY() - 10, null);
             }
             for (int i = 0; i < random.getFinalLIst().toArray().length - 1; i++) {
                 g2.setColor(Color.WHITE);
@@ -41,6 +42,8 @@ public class Zadanie2 extends JFrame {
         counter = 0;
         ImageIcon mapa = new ImageIcon("PROJEKT/map/black.jpg");
         map = mapa.getImage();
+        mapa = new ImageIcon("PROJEKT/map/kropka.png");
+        dot = mapa.getImage();
         panel2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
