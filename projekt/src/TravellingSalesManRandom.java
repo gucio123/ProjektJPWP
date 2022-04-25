@@ -48,6 +48,14 @@ public class TravellingSalesManRandom {
         return finalLIst;
     }
 
+    public List<City> getList() {
+        return list;
+    }
+
+    public void setList(List<City> list) {
+        this.list = list;
+    }
+
     public static void main(String[] args) {
         TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
         random.way();
