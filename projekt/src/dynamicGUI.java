@@ -62,6 +62,10 @@ public class dynamicGUI extends JFrame {
                 this.images[i] = this.images[0];
                 this.images[0] = img.getImage();
             }
+//            if(i == 3){
+//                this.images[i] = this.images[1];
+//                this.images[1] = img.getImage();
+//            }
         }
 
         this.dynamic = new DynamicBackpack();

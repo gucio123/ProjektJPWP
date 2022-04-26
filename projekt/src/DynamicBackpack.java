@@ -6,7 +6,7 @@ public class DynamicBackpack {
     private List<Items> finalList = new ArrayList<>();
     public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
             new Items("Jablko", 1, 2),
-            new Items("Diament", 2, 6),
+            new Items("Diament", 3, 6),
             new Items("Zloto", 2, 8),
             new Items("Laptop", 2, 5),
             new Items("Hantelka", 4, 8),
