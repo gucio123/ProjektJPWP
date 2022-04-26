@@ -10,7 +10,7 @@ public class GreedyBackpack {
             new Items("Diament", 2, 6),
             new Items("Zloto", 2, 8),
             new Items("Laptop", 2, 5),
-            new Items("Hantelka", 4, 7),
+            new Items("Hantelka", 4, 8),
             new Items("Zegarek", 6, 18),
             new Items("Jablko", 1, 2)));
 
@@ -34,7 +34,8 @@ public class GreedyBackpack {
             float maxi = 0;
             int index = 0;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
-                wage = this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
+                wage = (float)this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
+                System.out.println(this.getItems().get(i).getName() + " " + wage);
                 if (wage > maxi) {
                     maxi = wage;
                     index = i;
