@@ -15,12 +15,12 @@ public class SimulatedAnnealingTSM {
     private float temperature;
     private List<Float> listOfTemperatures =  new ArrayList<>();
     private List<Integer> listOfLenghts = new ArrayList<>();
+    private TravellingSalesManRandom firstPath = new TravellingSalesManRandom("Waszyngton");
     public SimulatedAnnealingTSM(int numberOfIterations, float startingTemperature, float temperatureRate) {
         this.numberOfIterations = numberOfIterations;
         this.startingTemperature = startingTemperature;
         this.temperatureRate = temperatureRate;
         this.finalList = new ArrayList<>();
-        TravellingSalesManRandom firstPath = new TravellingSalesManRandom("Waszyngton");
         firstPath.way();
         this.currentPath = firstPath.getFinalLIst();
     }
@@ -46,6 +46,7 @@ public class SimulatedAnnealingTSM {
         this.currentLength = this.calculatePath(currentPath);
     }
     public void algorithm(){
+        long start = System.nanoTime();
         this.bestLength = this.calculatePath(this.currentPath);
         this.currentLength = this.calculatePath(this.currentPath);
         this.temperature = this.startingTemperature;
@@ -58,14 +59,17 @@ public class SimulatedAnnealingTSM {
                     this.unDoSwap();
                     this.temperature /= this.temperatureRate;
                 }
-                System.out.println("Droga po warunku odwrotu" + this.currentPath + " " + this.currentLength);
-                System.out.println(i);
+//                System.out.println("Droga po warunku odwrotu" + this.currentPath + " " + this.currentLength);
+//                System.out.println(i);
             }
             this.temperature *= this.temperatureRate;
             this.finalList.add(this.currentPath);
             this.listOfTemperatures.add(temperature);
             this.listOfLenghts.add(this.currentLength);
         }
+        long end = System.nanoTime();
+        long time = end - start;
+        System.out.println(time);
     }
 
     public List<Float> getListOfTemperatures() {
@@ -86,5 +90,15 @@ public class SimulatedAnnealingTSM {
 
     public float getTemperature() {
         return temperature;
+    }
+
+    public TravellingSalesManRandom getFirstPath() {
+        return firstPath;
+    }
+
+    public static void main(String[] args) {
+        SimulatedAnnealingTSM anneal = new SimulatedAnnealingTSM(100, 2000, (float) 0.985);
+        anneal.algorithm();
+//        System.out.println(anneal.bestLength);
     }
 }

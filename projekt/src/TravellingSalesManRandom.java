@@ -47,4 +47,22 @@ public class TravellingSalesManRandom {
     public List<City> getFinalLIst() {
         return finalLIst;
     }
+
+    public List<City> getList() {
+        return list;
+    }
+
+    public void setFirstCity(String firstCity) {
+        this.firstCity = firstCity;
+    }
+
+    public void setList(List<City> list) {
+        this.list = list;
+    }
+
+    public static void main(String[] args) {
+        TravellingSalesManRandom random = new TravellingSalesManRandom("Waszyngton");
+        random.way();
+        System.out.println(random.getWayLenght());
+    }
 }

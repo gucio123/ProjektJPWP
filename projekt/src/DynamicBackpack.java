@@ -5,18 +5,14 @@ import java.util.List;
 public class DynamicBackpack {
     private List<Items> finalList = new ArrayList<>();
     public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
-//            new Items("koszula", 7, 75), new Items("spodnie", 8, 150), new Items("sweter", 6, 250)
-//            , new Items("czapka", 4, 35), new Items("kapielowki", 3, 10), new Items("buty", 9, 100)
-            new Items("Skarpety",1, 2),
-            new Items("taśmy",2, 5),
-            new Items("Tank-top",2, 8),
-            new Items("Pas",2, 5),
-            new Items("rekawice",1, 1),
-            new Items("Białko",4, 8),
-            new Items("Trenbolon",6, 18),
-            new Items("Kreatyna",5, 10),
-            new Items("tygrys bubblegum",4, 6)
-            ));
+            new Items("Jablko", 1, 2),
+            new Items("Diament", 2, 6),
+            new Items("Zloto", 2, 8),
+            new Items("Laptop", 2, 5),
+            new Items("Hantelka", 4, 8),
+            new Items("Zegarek", 6, 18),
+            new Items("Serwer", 5, 10)));
+
     private int capacity = 20;
     private int[][] pij = new int[listOfItems.toArray().length][capacity];
     private int[][] qij = new int[listOfItems.toArray().length][capacity];
@@ -38,13 +34,13 @@ public class DynamicBackpack {
                 pij[i][j] = pij[i-1][j];
                 load[i][j] = load[i-1][j];
                 qij[i][j] = qij[i-1][j];
-                if(load[i-1][j] + listOfItems.get(i).getWeight() <= j + 1){
-                    pij[i][j] += listOfItems.get(i).getValue();
-                    load[i][j] += listOfItems.get(i).getWeight();
-                    qij[i][j] = i+1;
-                }
                 if(listOfItems.get(i).getWeight() <= j+1){
-                    if((pij[i-1][j] < listOfItems.get(i).getValue())) {
+                    if(load[i - 1][j] + listOfItems.get(i).getWeight() <= j + 1){
+                        pij[i][j] += listOfItems.get(i).getValue();
+                        load[i][j] += listOfItems.get(i).getWeight();
+                        qij[i][j] = i+1;
+                    }
+                    if((pij[i - 1][j] < listOfItems.get(i).getValue())) {
                         pij[i][j] = listOfItems.get(i).getValue();
                         load[i][j] = listOfItems.get(i).getWeight();
                         qij[i][j] = i+1;
@@ -60,6 +56,27 @@ public class DynamicBackpack {
             actualCap -= listOfItems.get(qij[listOfItems.toArray().length-1][actualCap - 1] - 1).getWeight();
         }
     }
+
+    public List<Items> getFinalList() {
+        return finalList;
+    }
+
+    public List<Items> getListOfItems() {
+        return listOfItems;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int[][] getPij() {
+        return pij;
+    }
+
+    public int[][] getQij() {
+        return qij;
+    }
+
     public static void main(String[] args) {
         DynamicBackpack back = new DynamicBackpack();
         back.dynamic();

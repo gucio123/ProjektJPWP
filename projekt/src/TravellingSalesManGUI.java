@@ -122,8 +122,8 @@ public class TravellingSalesManGUI extends JFrame {
                 Runnable paintController = new Runnable() {
                     @Override
                     public void run() {
-                        int counter = 16384;
-                        int pomoc = 16384;
+                        int counter = genetic.numberInFirst / 2;
+                        int pomoc = genetic.numberInFirst / 2;
                         int next;
                         for (int k = 0; k < genetic.getFinalList().toArray().length; k++) {
                             index = k;
@@ -154,12 +154,6 @@ public class TravellingSalesManGUI extends JFrame {
                 random.way();
                 paintcheck = true;
                 panel2.repaint();
-//                OnePathGUI ramka = new OnePathGUI(random.getFinalLIst());
-//                ramka.setContentPane(new OnePathGUI(random.getFinalLIst()).panel );
-//                ramka.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                ramka.pack();
-//                ramka.setVisible(true);
-//                ramka.setSize(798, 570);
             }
         });
         wyzarzanie.addActionListener(new ActionListener() {
@@ -200,11 +194,7 @@ public class TravellingSalesManGUI extends JFrame {
 
     public static void main(String[] args) throws IOException {
         TravellingSalesManGUI frame = new TravellingSalesManGUI();
-        frame.setContentPane(new TravellingSalesManGUI().panel2);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-        frame.setSize(798, 570);
+
     }
 }
 

@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import javax.swing.JFrame;
 
 public class mainGUI extends JFrame {
     private JPanel panel1;
     private JButton backpackButton;
     private JButton TravellingSalesmanButton;
-    private JButton chujbutton3;
 
     public mainGUI() {
         TravellingSalesmanButton.addActionListener(new ActionListener() {
@@ -20,7 +20,12 @@ public class mainGUI extends JFrame {
         backpackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BackPackGUI();
+                new backpackGUI();
+                JFrame frame = new JFrame();
+                frame.setContentPane(new backpackGUI().getPanel4());
+                frame.setVisible(true);
+                frame.pack();
+                frame.setSize(500, 200);
             }
         });
     }
