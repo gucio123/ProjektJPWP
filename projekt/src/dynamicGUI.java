@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Collections;
 
 public class dynamicGUI extends JFrame {
 
@@ -43,7 +44,7 @@ public class dynamicGUI extends JFrame {
             for (int k = 0; k < 7; k++) {
                 if (dynamic.getFinalList().contains(dynamic.getListOfItems().get(k))) {
                     g2d.drawImage(images[k], m, 350, null);
-                    g2d.drawString("Weight: " + dynamic.getFinalList().get(n).getWeight(), m, 470);
+                    g2d.drawString("Weight: " + dynamic.getListOfItems().get(k).getWeight(), m, 470);
                     n++;
                     m += 120;
                 }
@@ -57,7 +58,12 @@ public class dynamicGUI extends JFrame {
             int index = i + 1;
             ImageIcon img = new ImageIcon("PROJEKT/items/img" + index + ".png");
             this.images[i] = img.getImage();
+            if(i == 6){
+                this.images[i] = this.images[0];
+                this.images[0] = img.getImage();
+            }
         }
+
         this.dynamic = new DynamicBackpack();
         this.setContentPane(this.panel5);
         this.pack();
