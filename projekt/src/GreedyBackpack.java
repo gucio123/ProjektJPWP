@@ -35,18 +35,15 @@ public class GreedyBackpack {
             int index = 0;
             for (int i = 0; i < this.getItems().toArray().length; i++) {
                 wage = (float)this.getItems().get(i).getValue() / this.getItems().get(i).getWeight();
-                System.out.println(this.getItems().get(i).getName() + " " + wage);
                 if (wage > maxi) {
                     maxi = wage;
                     index = i;
                 }
-
-//                zad4 edytuj greedy tak aby wyswietlal rownie optymalnie jak dynamic, działa, ale nie dodaje wszystkich itemow
-//                else if (wage == maxi) {
-//                    if (this.getItems().get(i).getValue() > this.getItems().get(index).getValue()){
-//                        index = i;
-//                    }
-//                }
+                else if (wage == maxi) {
+                    if (this.getItems().get(index).getWeight() + bkpkCapacity >= bkpkMaxCapacity){
+                        index = i;
+                    }
+                }
                 if (i == this.getItems().toArray().length - 1) {
                     if (bkpkCapacity + this.getItems().get(index).getWeight() <= bkpkMaxCapacity) {
                         this.backpack.add(this.getItems().get(index));
