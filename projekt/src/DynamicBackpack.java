@@ -6,7 +6,7 @@ public class DynamicBackpack {
     private List<Items> finalList = new ArrayList<>();
     public List<Items> listOfItems = new ArrayList<Items>(Arrays.asList(
             new Items("Jablko", 1, 2),
-            new Items("Diament", 2, 6),
+            new Items("Diament", 3, 6),
             new Items("Zloto", 2, 8),
             new Items("Laptop", 2, 5),
             new Items("Hantelka", 4, 8),
@@ -17,35 +17,56 @@ public class DynamicBackpack {
     private int[][] pij = new int[listOfItems.toArray().length][capacity];
     private int[][] qij = new int[listOfItems.toArray().length][capacity];
     private int[][] load = new int[listOfItems.toArray().length][capacity];
+    private int[][] help = new int[listOfItems.toArray().length + 1][capacity + 1];
+    static int max(int a, int b) {
+        return (a > b) ? a : b;
+    }
     public void dynamic(){
-        for(int j = 0; j < capacity; j++) {
-            if (listOfItems.get(0).getWeight() <= j + 1) {
-                pij[0][j] = listOfItems.get(0).getValue();
-                load[0][j] = listOfItems.get(0).getWeight();
-                qij[0][j] = 1;
-            }
-            else{
-                pij[0][j] = 0;
-                qij[0][j] = 0;
+//        for(int j = 0; j < capacity; j++) {
+//            if (listOfItems.get(0).getWeight() <= j + 1) {
+//                pij[0][j] = listOfItems.get(0).getValue();
+//                load[0][j] = listOfItems.get(0).getWeight();
+//                qij[0][j] = 1;
+//            }
+//            else{
+//                pij[0][j] = 0;
+//                qij[0][j] = 0;
+//            }
+//        }
+//        for (int i = 1; i < listOfItems.toArray().length; i++){
+//            for(int j = 0; j < capacity; j++){
+//                pij[i][j] = pij[i-1][j];
+//                load[i][j] = load[i-1][j];
+//                qij[i][j] = qij[i-1][j];
+//                if(listOfItems.get(i).getWeight() <= j+1){
+//                    if(load[i - 1][j] + listOfItems.get(i).getWeight() <= j + 1){
+//                        pij[i][j] += listOfItems.get(i).getValue();
+//                        load[i][j] += listOfItems.get(i).getWeight();
+//                        qij[i][j] = i+1;
+//                    }
+//                    if((pij[i - 1][j] < listOfItems.get(i).getValue())) {
+//                        pij[i][j] = listOfItems.get(i).getValue();
+//                        load[i][j] = listOfItems.get(i).getWeight();
+//                        qij[i][j] = i+1;
+//                    }
+//                }
+//            }
+//        }
+        for (int i = 0; i <= listOfItems.toArray().length; i++) {
+            for (int w = 0; w <= capacity; w++) {
+                if (i == 0) {
+                    help[i][w] = 0;
+                } else if (listOfItems.get(i - 1).getWeight() <= w) {
+                    help[i][w] = max(listOfItems.get(i - 1).getValue() + help[i - 1][w - listOfItems.get(i - 1).getWeight()], help[i - 1][w]);
+                } else {
+                    help[i][w] = help[i - 1][w];
+                }
             }
         }
-        for (int i = 1; i < listOfItems.toArray().length; i++){
-            for(int j = 0; j < capacity; j++){
-                pij[i][j] = pij[i-1][j];
-                load[i][j] = load[i-1][j];
-                qij[i][j] = qij[i-1][j];
-                if(listOfItems.get(i).getWeight() <= j+1){
-                    if(load[i - 1][j] + listOfItems.get(i).getWeight() <= j + 1){
-                        pij[i][j] += listOfItems.get(i).getValue();
-                        load[i][j] += listOfItems.get(i).getWeight();
-                        qij[i][j] = i+1;
-                    }
-                    if((pij[i - 1][j] < listOfItems.get(i).getValue())) {
-                        pij[i][j] = listOfItems.get(i).getValue();
-                        load[i][j] = listOfItems.get(i).getWeight();
-                        qij[i][j] = i+1;
-                    }
-                }
+
+        for (int i = 1; i <= listOfItems.toArray().length; i++) {
+            for (int w = 1; w <= capacity; w++) {
+                pij[i - 1][w - 1] = help[i][w];
             }
         }
     }
