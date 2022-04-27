@@ -22,36 +22,36 @@ public class DynamicBackpack {
         return (a > b) ? a : b;
     }
     public void dynamic(){
-//        for(int j = 0; j < capacity; j++) {
-//            if (listOfItems.get(0).getWeight() <= j + 1) {
-//                pij[0][j] = listOfItems.get(0).getValue();
-//                load[0][j] = listOfItems.get(0).getWeight();
-//                qij[0][j] = 1;
-//            }
-//            else{
-//                pij[0][j] = 0;
-//                qij[0][j] = 0;
-//            }
-//        }
-//        for (int i = 1; i < listOfItems.toArray().length; i++){
-//            for(int j = 0; j < capacity; j++){
-//                pij[i][j] = pij[i-1][j];
-//                load[i][j] = load[i-1][j];
-//                qij[i][j] = qij[i-1][j];
-//                if(listOfItems.get(i).getWeight() <= j+1){
-//                    if(load[i - 1][j] + listOfItems.get(i).getWeight() <= j + 1){
-//                        pij[i][j] += listOfItems.get(i).getValue();
-//                        load[i][j] += listOfItems.get(i).getWeight();
-//                        qij[i][j] = i+1;
-//                    }
-//                    if((pij[i - 1][j] < listOfItems.get(i).getValue())) {
-//                        pij[i][j] = listOfItems.get(i).getValue();
-//                        load[i][j] = listOfItems.get(i).getWeight();
-//                        qij[i][j] = i+1;
-//                    }
-//                }
-//            }
-//        }
+        for(int j = 0; j < capacity; j++) {
+            if (listOfItems.get(0).getWeight() <= j + 1) {
+                pij[0][j] = listOfItems.get(0).getValue();
+                load[0][j] = listOfItems.get(0).getWeight();
+                qij[0][j] = 1;
+            }
+            else{
+                pij[0][j] = 0;
+                qij[0][j] = 0;
+            }
+        }
+        for (int i = 1; i < listOfItems.toArray().length; i++){
+            for(int j = 0; j < capacity; j++){
+                pij[i][j] = pij[i-1][j];
+                load[i][j] = load[i-1][j];
+                qij[i][j] = qij[i-1][j];
+                if(listOfItems.get(i).getWeight() <= j+1){
+                    if(load[i - 1][j] + listOfItems.get(i).getWeight() <= j + 1){
+                        pij[i][j] += listOfItems.get(i).getValue();
+                        load[i][j] += listOfItems.get(i).getWeight();
+                        qij[i][j] = i+1;
+                    }
+                    if((pij[i - 1][j] < listOfItems.get(i).getValue())) {
+                        pij[i][j] = listOfItems.get(i).getValue();
+                        load[i][j] = listOfItems.get(i).getWeight();
+                        qij[i][j] = i+1;
+                    }
+                }
+            }
+        }
         for (int i = 0; i <= listOfItems.toArray().length; i++) {
             for (int w = 0; w <= capacity; w++) {
                 if (i == 0) {
